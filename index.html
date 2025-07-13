@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no"> <!-- tells iOS Safari not to auto-link phone numbers on this page -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <script src="static/script.js" defer></script>
+    <script src="static/login.js"></script>
+
+    <title style="font-family:monospace;">AP0110</title>
+</head>
+
+
+<body>
+
+    <section id="AP0110">
+
+        <!-- Full-screen button -->
+        <button id="fullscreenBtn" onclick="toggleFullscreen()" title="Toggle Full Screen">
+            <svg id="fullscreenIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+            </svg>
+        </button>
+
+        <div style="display: flex; flex-direction:column; width:100%; margin:0 2em; max-width:600px; padding:0 1em;">
+
+            <div id="neonav">
+                <div id="toprow" class="bar">
+
+                    <svg style="align-self:center; margin-right: 8px;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="40" height="40" viewBox="0, 0, 120, 120">
+                        <g>
+                            <path d="M70.059,100.049 C47.678,112.813 3.2,131.539 3.189,110.425 L3.157,49.435 C4.044,49.434 4.763,48.715 4.762,47.828 C4.762,46.941 4.042,46.222 3.155,46.223 L3.144,23.749 C4.402,23.748 5.422,22.727 5.421,21.468 C5.284,20.553 4.843,19.665 3.974,19.27 C3.189,18.912 2.785,18.201 2.661,17.373 C2.666,16.549 2.981,16.027 3.648,15.611 L16.893,7.963 L30.139,0.316 C30.833,-0.054 31.442,-0.065 32.159,0.342 C32.814,0.864 33.228,1.569 33.144,2.428 C33.053,3.378 33.601,4.204 34.325,4.781 C35.415,5.411 36.809,5.038 37.439,3.948 L56.896,15.196 C56.452,15.963 56.715,16.946 57.483,17.39 C58.251,17.833 59.233,17.571 59.677,16.803 L112.48,47.326 C130.76,57.892 92.303,87.049 70.059,100.049" fill="#FFFFFF"/>
+                            <path d="M37.649,42.827 C39.195,41.934 40.648,41.997 42.121,43.208 L68.156,64.53 C63.752,67.621 59.191,70.471 54.567,73.216 C50.049,75.857 45.332,78.122 40.648,80.444 L35.647,46.946 C35.431,45.009 36.103,43.719 37.649,42.827 z" fill="#ED4D05"/>
+                            <path d="M31.94,32.817 L31.94,32.817 C38.597,28.973 44.289,28.73 50.031,33.404 L96.102,70.97 L96.108,70.965 L96.158,71.016 L96.364,71.183 L96.341,71.202 C98.892,73.666 99.804,77.772 97.37,80.653 L97.487,80.855 C91.246,85.991 94.846,83.154 86.575,89.224 L86.453,89.013 C89.155,85.997 87.791,82.032 85.289,79.479 L42.89,44.754 C41.44,43.562 40.01,43.5 38.488,44.379 C36.967,45.257 36.305,46.527 36.518,48.433 L44.702,103.261 C45.469,106.477 48.29,109.827 51.989,109.133 C42.903,113.125 47.142,111.424 39.321,114.356 C35.503,114.961 32.928,111.536 32.034,108.333 L32.039,108.331 L23.213,48.887 C22.131,41.523 25.188,36.715 31.94,32.817 z" fill="#FF4F00"/>
+                            <text transform="matrix(0.866, 0.5, -0.5, 0.866, 80.069, 44.594)">
+                                <tspan x="-21.674" y="1.886" font-family="Menlo-Bold" font-size="12" fill="#000000">AP0110</tspan>
+                            </text>
+                            <!-- <path d="M68.044,65.467 C63.64,68.558 59.079,71.407 54.455,74.153 C49.937,76.793 45.22,79.058 40.536,81.381" fill-opacity="0" stroke="#ED4D05" stroke-width="12" stroke-linecap="square"/> -->
+                            <path d="M3.946,114.268 C15.426,116.747 29.935,111.402 40.424,107.086 C49.552,103.33 58.398,99.04 67.001,94.213 C79.762,86.528 92.239,78.057 103.017,67.711 C108.148,62.785 113.545,57.184 115.705,50.246 C121.778,57.748 109.319,70.079 104.502,74.703 C94.211,84.582 82.287,92.788 70.048,100.055 C67.591,101.434 65.967,102.364 63.226,103.764 C60.688,105.061 58.153,106.365 55.567,107.562 C43.837,112.989 29.507,119.471 16.249,119.943 C11.661,120.106 5.593,119.353 3.946,114.268 z" fill="#000000" fill-opacity="0.25"/>
+                        </g>
+                    </svg>
+
+                    <!-- <hr style="height:60%; color:rgba(255,255,255,0.5); border:1px solid black;"> -->
+                    <div id="search" style="display:flex; flex-direction:row;">
+                        <div id="searchIcon" style="height:100%; aspect-ratio:1; display:flex; cursor: pointer;">
+                            <svg x="0" y="0" height="1em" viewBox="0, 0, 72, 72" stroke="currentColor">
+                                <g id="search" transform="translate(0, 0)">
+                                    <path d="M28.5,54.5 C14.141,54.5 2.5,42.859 2.5,28.5 C2.5,14.141 14.141,2.5 28.5,2.5 C42.859,2.5 54.5,14.141 54.5,28.5 C54.5,42.859 42.859,54.5 28.5,54.5 z" fill-opacity="0" stroke-width="6"/>
+                                    <path d="M70.5,70.5 L47.5,47.5" fill-opacity="0" stroke-width="6" stroke-linecap="round"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <form id="searchForm" name="searchForm">
+                            <input class="pop-up" data-id="info7" id="topSearch" name="q" type="search" placeholder="A P 0 1 1 0" >
+                        </form>
+                        <!-- <div style="height:100%; aspect-ratio:1; display:flex; cursor:pointer;">
+                            <svg style="opacity:0.5;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mic-icon lucide-mic"><path d="M12 19v3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><rect x="9" y="2" width="6" height="13" rx="3"/></svg>
+                        </div> -->
+                        <div onclick="searchTabsToggle('scan', this)" class="pop-up" title="scan" style="height:100%; aspect-ratio:1; display:flex; cursor:pointer;">
+                            <svg style="opacity:0.5;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scan-icon lucide-scan"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/></svg>
+                        </div>
+                    </div>
+                    <!-- <hr style="height:60%; color:rgba(255,255,255,0.5); border:1px solid black;"> -->
+                    <div  onclick="toggleLaunchpad()" class="pop-up" id="apps_button" class="pop-up" data-id="info6" title="Apps" style="height:100%; aspect-ratio:1; display:flex; cursor:pointer;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_429_11069)">
+                                <path d="M4 4H6V6H4V4Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 18H6V20H4V18Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18 4H20V6H18V4Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18 11H20V13H18V11Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 11H13V13H11V11Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 11H6V13H4V11Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 4H13V6H11V4Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 18H13V20H11V18Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18 18H20V20H18V18Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                <div id="scan" class="tab" style="width:100%; margin:0 auto; height:0; overflow: hidden; transition: height 0.5s ease;">
+                    <span style="display:flex; flex-direction:row;">
+                        <hr style="width: calc(100% - 90px); margin:0; border:1px solid black;">
+                        <span style="flex:1;"></span>
+                        <hr style="width: 46px; margin:0; border:1px solid black;">
+                    </span>
+                    
+                    
+                    <div id="scannerContainer" tabindex="-1">
+                        <div class="container-content">
+                            <div id="dropZone">
+                                <button id="saveBtn" style="display:none;" onclick="openModal('login')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-floppy-disk-icon lucide-floppy-disk"><path d="M7 3v5h8"/><path d="M5 21a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8"/></svg>
+                                </button>
+                                <button id="clearSelectionBtn" style="display:none;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                </button>
+                                <div id="dragDrop">
+                                    <div>
+                                        <button id="openBtn" title="Open" onclick="openModal('login')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folders-icon lucide-folders"><path d="M20 17a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3.9a2 2 0 0 1-1.69-.9l-.81-1.2a2 2 0 0 0-1.67-.9H8a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2Z"/><path d="M2 8v11a2 2 0 0 0 2 2h14"/></svg>
+                                        </button>
+                                        <button id="uploadBtn" title="Upload">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload-icon lucide-upload"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg>
+                                        </button>
+                                        <button id="openCameraBtn" title="Camera">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera-icon lucide-camera"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="preview-container">
+                                    <div id="previewBtns">
+                                        <button id="addToInputBtn" style="display:none;"></button>
+                                    </div>
+                                    <video id="cameraFeed" autoplay playsinline></video>
+                                    <img id="preview" alt="Upload Preview">
+                                    <button id="captureBtn" style="display:none;"></button>
+                                </div>
+                                <input type="file" id="fileInput" accept="image/*" style="display:none;">
+                                <div class="error-message" id="errorMsg" aria-live="polite"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                    
+            </div>
+            
+        </div>
+
+        <div id="launchpad">
+            
+            <div id="appSearch" style="margin:2em auto 1em auto; display:flex; align-items:center; background-color: rgba(255,255,255,0.1); border-radius: 8px; padding: 0.5em 1em; max-width: 300px; border: 1px solid rgba(255,255,255,0.2);">
+                    <svg x="0" y="0" height="1em" viewBox="0, 0, 72, 72" stroke="currentColor" style="margin-right: 0.5em; opacity: 0.7;">
+                        <g id="search" transform="translate(0, 0)">
+                            <path d="M28.5,54.5 C14.141,54.5 2.5,42.859 2.5,28.5 C2.5,14.141 14.141,2.5 28.5,2.5 C42.859,2.5 54.5,14.141 54.5,28.5 C54.5,42.859 42.859,54.5 28.5,54.5 z" fill-opacity="0" stroke-width="6"/>
+                            <path d="M70.5,70.5 L47.5,47.5" fill-opacity="0" stroke-width="6" stroke-linecap="round"/>
+                        </g>
+                    </svg>
+                <input type="search" placeholder="Search" style="background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 14px; font-family: inherit;">
+            </div>
+
+            <div id="appGrid">
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ai">
+                        
+                    <p class="appName">GPT</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path fill="var(--color-cyan)" stroke="none" d="M20 17a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3.9a2 2 0 0 1-1.69-.9l-.81-1.2a2 2 0 0 0-1.67-.9H8a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2Z"/><path fill="none" stroke="var(--color-cyan)" d="M2 8v11a2 2 0 0 0 2 2h14"/></svg>
+                        <p class="appName">Files</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="#FF4F00" fill="#FF4F00" d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path stroke="white" fill="white" d="m10 15 5-3-5-3z"/></svg> -->
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle stroke="white" fill="white" cx="12" cy="12" r="10"/><polygon stroke="#FF4F00" fill="#FF4F00" points="10 8 16 12 10 16 10 8"/></svg> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect stroke="white" fill="white" width="18" height="18" x="3" y="3" rx="2"/><path stroke="#FF4F00" fill="#FF4F00" d="m9 8 6 4-6 4Z"/></svg>
+                        <p class="appName">Player</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m14.31 8 5.74 9.94"/><path d="M9.69 8h11.48"/><path d="m7.38 12 5.74-9.94"/><path d="M9.69 16 3.95 6.06"/><path d="M14.31 16H2.83"/><path d="m16.62 12-5.74 9.94"/></svg>
+                        <p class="appName">Photos</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="#f2f2f2" stroke="var(--color-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-pen-line-icon lucide-file-pen-line"><path d="m18 5-2.414-2.414A2 2 0 0 0 14.172 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/><path d="M21.378 12.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><path stroke="black" stroke-width="1" d="M8 18h1"/></svg> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="#f2f2f2" stroke="var(--color-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                        <p class="appName">Docs</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="#f2f2f2" stroke="var(--color-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-spreadsheet-icon lucide-file-spreadsheet"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path stroke="var(--color-green)" d="M14 2v4a2 2 0 0 0 2 2h4"/><path stroke="var(--color-green)" d="M8 13h2"/><path stroke="var(--color-green)" d="M14 13h2"/><path stroke="var(--color-green)" d="M8 17h2"/><path stroke="var(--color-green)" d="M14 17h2"/></svg>
+                        <p class="appName">Sheets</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="#f2f2f2" stroke="var(--color-orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tv"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"/></svg>
+                        <p class="appName">Slides</p>
+                    </div>
+                </div>
+                <!-- <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-notepad-text-icon lucide-notepad-text"><path d="M8 2v4"/><path d="M12 2v4"/><path d="M16 2v4"/><rect width="16" height="18" x="4" y="4" rx="2"/><path d="M8 10h6"/><path d="M8 14h8"/><path d="M8 18h5"/></svg>
+                        <p class="appName">Notes</p>
+                    </div>
+                </div> -->
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days-icon lucide-calendar-days"><rect fill="#f2f2f2" stroke="var(--color-orange)" width="18" height="18" x="3" y="4" rx="2"/><path stroke="var(--color-red)" d="M3 10h18"/><path stroke="black" d="M8 14h.01"/><path stroke="black" d="M12 14h.01"/><path stroke="black" d="M16 14h.01"/><path stroke="black" d="M8 18h.01"/><path stroke="black" d="M12 18h.01"/><path stroke="black" d="M16 18h.01"/><path stroke="gray" d="M8 2v4"/><path stroke="gray" d="M16 2v4"/></svg>
+                        <p class="appName">Calendar</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="#f2f2f2" stroke="var(--color-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><rect x="2" y="4" width="20" height="16" rx="2"/><path stroke-width="1" d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/></svg>
+                        <p class="appName">Email</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon message">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="none" style="transform:scaleX(-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-messages-square-icon lucide-messages-square"><path fill="var(--color-cyan)" stroke="var(--color-cyan)" d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path fill="var(--color-green)" d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg>
+                        <p class="appName">Messages</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon weather">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="var(--color-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-sun-icon lucide-cloud-sun"><path stroke="var(--color-yellow)" d="M12 2v2"/><path stroke="var(--color-yellow)" d="m4.93 4.93 1.41 1.41"/><path stroke="var(--color-yellow)" d="M20 12h2"/><path stroke="var(--color-yellow)" d="m19.07 4.93-1.41 1.41"/><path fill="var(--color-yellow)" stroke="var(--color-yellow)" d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path fill="#f2f2f2" d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></svg>
+                        <p class="appName">Weather</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        
+                        <p class="appName">Earth</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon elements">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="atom"><circle stroke="var(--color-violet)" cx="12" cy="12" r="1"/><path stroke="var(--color-orange)" d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"/><path stroke="var(--color-red)" d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"/></svg>
+                        <p class="appName">Elements</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator-icon lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+                        <p class="appName">Calculator</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gamepad-icon lucide-gamepad"><rect stroke="currentColor" width="20" height="12" x="2" y="6" rx="2"/><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/></svg>
+                        <p class="appName">Arcade</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="lightyellow" stroke="var(--color-yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-coins-icon lucide-coins"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet-cards-icon lucide-wallet-cards"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2"/><path d="M3 11h3c.8 0 1.6.3 2.1.9l1.1.9c1.6 1.6 4.1 1.6 5.7 0l1.1-.9c.5-.5 1.3-.9 2.1-.9H21"/></svg>
+                        <p class="appName">Wallets</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-qr-code-icon lucide-qr-code"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
+                        <p class="appName">Code-Gen</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon radio">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="radio"><path stroke="var(--color-cyan)" d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path stroke="var(--color-cyan)" d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle stroke-width="2" cx="12" cy="12" r="2"/><path stroke="var(--color-cyan)" d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path stroke="var(--color-cyan)" d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></svg> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-radio-tower-icon lucide-radio-tower"><path d="M4.9 16.1C1 12.2 1 5.8 4.9 1.9"/><path d="M7.8 4.7a6.14 6.14 0 0 0-.8 7.5"/><circle cx="12" cy="9" r="2"/><path d="M16.2 4.8c2 2 2.26 5.11.8 7.47"/><path d="M19.1 1.9a9.96 9.96 0 0 1 0 14.1"/><path d="M9.5 18h5"/><path d="m8 22 4-11 4 11"/></svg>
+                        <p class="appName">Radio</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon tv">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tv"><rect fill="var(--color-red)" stroke="var(--color-red)" width="20" height="15" x="2" y="7" rx="2" ry="2"/><polyline stroke="lightgray" points="17 2 12 7 7 2"/></svg> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tv-icon lucide-tv"><path d="m17 2-5 5-5-5"/><rect width="20" height="15" x="2" y="7" rx="2"/></svg>
+                        <p class="appName">TV</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon tv">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="var(--color-violet)" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-ellipsis-icon lucide-shield-ellipsis"><path stroke="none" d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/></svg>
+                        <p class="appName">VPN</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-computer-icon lucide-computer"><rect width="14" height="8" x="5" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 18h2"/><path d="M12 18h6"/></svg>
+                        <p class="appName">VNC</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor-stop-icon lucide-monitor-stop"><path d="M12 17v4"/><path d="M8 21h8"/><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="9" y="7" width="6" height="6" rx="1"/></svg> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" stroke="var(--color-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box-icon lucide-box"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                        <p class="appName">Virtual Machines</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon settings">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="lightgray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 20.66-1-1.73"/><path d="M11 10.27 7 3.34"/><path d="m20.66 17-1.73-1"/><path d="m3.34 7 1.73 1"/><path d="M14 12h8"/><path d="M2 12h2"/><path d="m20.66 7-1.73 1"/><path d="m3.34 17 1.73-1"/><path d="m17 3.34-1 1.73"/><path d="m11 13.73-4 6.93"/></svg>
+                        <p class="appName">Settings</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon store">
+                        <svg width="100%" height="100%" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
+                            <g>
+                                <path d="M14,3H4C3.4,3,3,3.4,3,4v10c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V4C15,3.4,14.6,3,14,3z"/>
+                                <path d="M14,17H4c-0.6,0-1,0.4-1,1v10c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V18C15,17.4,14.6,17,14,17z"/>
+                                <path d="M28,3H18c-0.6,0-1,0.4-1,1v10c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V4C29,3.4,28.6,3,28,3z"/>
+                                <path d="M27,22h-3v-3c0-0.6-0.4-1-1-1s-1,0.4-1,1v3h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3v3c0,0.6,0.4,1,1,1s1-0.4,1-1v-3h3c0.6,0,1-0.4,1-1S27.6,22,27,22z"/>
+                            </g>
+                        </svg>
+                        <p class="appName">Store</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/LibreTranslate.png" style="height:100%; width:100%; object-fit: contain; border-radius:13px;">
+                        <p class="appName">LibreTranslate</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Home_Assistant.png" style="height:100%; width:100%; object-fit: contain; border-radius:13px;">
+                        <p class="appName">Home Assistant</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/IFTTT.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">IFTTT</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/ZoneMinder.png" style="height:100%; width:100%; object-fit: contain; border-radius:13px;">
+                        <p class="appName">ZoneMinder</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Wikipedia.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Wikipedia</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/IFIXIT.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">IFIXIT</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/ollama.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">ollama</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Open_WebUI.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Open WebUI</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                    <svg width="60" height="61" viewBox="0 0 60 61" fill="none" id="svg-n8n"><rect x="0.000976562" y="0.804688" width="60" height="60" rx="13.128" fill="url(#svg-293652378_3377_paint0_linear_832_12467)"></rect><g filter="url(#svg-293652378_3377_filter0_d_832_12467)"><path fill-rule="evenodd" clip-rule="evenodd" d="M49.1963 24.8984C49.1963 27.0731 47.4334 28.8359 45.2588 28.8359C43.4241 28.8359 41.8825 27.5811 41.4453 25.8828H35.948C34.9855 25.8828 34.1642 26.5786 34.006 27.5279L33.8442 28.4989C33.6905 29.4208 33.2241 30.2232 32.5647 30.8047C33.2241 31.3862 33.6905 32.1886 33.8442 33.1105L34.006 34.0815C34.1642 35.0308 34.9855 35.7266 35.948 35.7266H37.5078C37.945 34.0283 39.4866 32.7734 41.3213 32.7734C43.4959 32.7734 45.2588 34.5363 45.2588 36.7109C45.2588 38.8856 43.4959 40.6484 41.3213 40.6484C39.4866 40.6484 37.945 39.3936 37.5078 37.6953H35.948C34.0232 37.6953 32.3805 36.3038 32.0641 34.4051L31.9022 33.4341C31.744 32.4849 30.9226 31.7891 29.9603 31.7891H28.3543C27.8628 33.4035 26.362 34.5781 24.5869 34.5781C22.8118 34.5781 21.311 33.4035 20.8195 31.7891H18.5105C18.019 33.4035 16.5183 34.5781 14.7432 34.5781C12.5685 34.5781 10.8057 32.8152 10.8057 30.6406C10.8057 28.466 12.5685 26.7031 14.7432 26.7031C16.6365 26.7031 18.2177 28.0394 18.5951 29.8203H20.735C21.1124 28.0394 22.6936 26.7031 24.5869 26.7031C26.4802 26.7031 28.0614 28.0394 28.4389 29.8203H29.9603C30.9226 29.8203 31.744 29.1245 31.9022 28.1752L32.0641 27.2042C32.3805 25.3056 34.0232 23.9141 35.948 23.9141H41.4453C41.8825 22.2158 43.4241 20.9609 45.2588 20.9609C47.4334 20.9609 49.1963 22.7238 49.1963 24.8984ZM47.2275 24.8984C47.2275 25.9857 46.3461 26.8672 45.2588 26.8672C44.1715 26.8672 43.29 25.9857 43.29 24.8984C43.29 23.8111 44.1715 22.9297 45.2588 22.9297C46.3461 22.9297 47.2275 23.8111 47.2275 24.8984ZM14.7432 32.6094C15.8305 32.6094 16.7119 31.7279 16.7119 30.6406C16.7119 29.5533 15.8305 28.6719 14.7432 28.6719C13.6559 28.6719 12.7744 29.5533 12.7744 30.6406C12.7744 31.7279 13.6559 32.6094 14.7432 32.6094ZM24.5869 32.6094C25.6742 32.6094 26.5556 31.7279 26.5556 30.6406C26.5556 29.5533 25.6742 28.6719 24.5869 28.6719C23.4996 28.6719 22.6181 29.5533 22.6181 30.6406C22.6181 31.7279 23.4996 32.6094 24.5869 32.6094ZM41.3213 38.6797C42.4086 38.6797 43.29 37.7982 43.29 36.7109C43.29 35.6236 42.4086 34.7422 41.3213 34.7422C40.234 34.7422 39.3525 35.6236 39.3525 36.7109C39.3525 37.7982 40.234 38.6797 41.3213 38.6797Z" fill="white"></path></g><defs><filter id="svg-293652378_3377_filter0_d_832_12467" x="2.83692" y="20.2578" width="54.3281" height="35.625" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="7.26562"></feOffset><feGaussianBlur stdDeviation="3.98437"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0"></feColorMatrix><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_832_12467"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_832_12467" result="shape"></feBlend></filter><linearGradient id="svg-293652378_3377_paint0_linear_832_12467" x1="0.000976563" y1="0.804688" x2="60.001" y2="60.8047" gradientUnits="userSpaceOnUse"><stop stop-color="#F26587"></stop><stop offset="1" stop-color="#E23A62"></stop></linearGradient></defs></svg>
+                        <p class="appName">n8n</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-code-icon lucide-file-code"><path d="M10 12.5 8 15l2 2.5"/><path d="m14 12.5 2 2.5-2 2.5"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/></svg> -->
+                        <img src="static/images/VSCode.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">VSCode</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Gitea.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Gitea</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-code-icon lucide-file-code"><path d="M10 12.5 8 15l2 2.5"/><path d="m14 12.5 2 2.5-2 2.5"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/></svg> -->
+                        <img src="static/images/MDN.jpg" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">MDN Web Docs</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Docker.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Docker</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/JupyterHub.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">JupyterHub</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Mastodon.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Mastodon</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" id="svg-Bitcoin"><g filter="url(#svg-502855479_24508_filter0_d_866_7726)"><g clip-path="url(#svg-502855479_24508_clip0_866_7726)"><g opacity="0.6" filter="url(#svg-502855479_24508_filter1_f_866_7726)"><path d="M46.7652 39.8458C46.1198 38.4435 44.9199 37.3057 43.1657 36.4328C45.8086 35.7726 47.3204 33.9655 47.7019 31.0113C47.8483 29.9419 47.7684 28.9673 47.4618 28.0861C47.155 27.2047 46.6439 26.435 45.9263 25.7764C45.2095 25.1173 44.3945 24.5534 43.4838 24.0841C42.5728 23.6147 41.503 23.1796 40.275 22.7792L41.6598 16.781L40.5383 15.2644L37.9945 15.9348L36.6482 21.7664C36.0135 21.6199 35.0419 21.4123 33.7335 21.1436L35.0909 15.2644L33.9802 13.6463L31.4251 14.4181L30.0403 20.4164C29.5128 20.3114 28.7414 20.1418 27.7259 19.9074L22.6854 18.7184L20.7298 21.0404L21.1453 22.2471L24.4261 23.232C25.6321 23.5104 26.2137 24.2131 26.1708 25.3396L24.5937 32.1711C24.7526 32.2078 24.8775 32.2452 24.9691 32.283L24.5881 32.1951L22.3791 41.7633C22.0655 42.5431 21.5119 42.8418 20.7184 42.6586L18.0767 42.0487L15.7202 44.6772L16.5141 46.0647L21.0936 47.3334C21.3952 47.403 21.8303 47.5077 22.4002 47.6468C22.9695 47.7867 23.3969 47.8896 23.6826 47.9555L21.2776 52.4159L22.2813 54.0251L25.9476 54.8715L27.3324 48.8733C27.995 49.0434 28.9611 49.2746 30.2306 49.5677L27.8936 54.0251L28.8513 55.5419L32.5166 56.3881L33.9179 50.3186C35.234 50.5557 36.4157 50.7038 37.4633 50.7611C38.5114 50.8186 39.5388 50.768 40.5451 50.6072C41.5512 50.447 42.4279 50.1602 43.1749 49.7476C43.9221 49.3356 44.5965 48.7472 45.1997 47.9838C45.8016 47.22 46.2888 46.2878 46.6596 45.1865C47.3759 43.0292 47.4107 41.2487 46.7652 39.8458ZM32.8158 25.444C32.9269 25.4696 33.2413 25.538 33.7588 25.649C34.2767 25.76 34.7068 25.851 35.0498 25.9218C35.3928 25.9927 35.8484 26.1188 36.4168 26.3002C36.985 26.4815 37.4582 26.6577 37.8365 26.8285C38.2148 26.9993 38.6214 27.2311 39.0548 27.5234C39.4892 27.8157 39.8185 28.1258 40.0433 28.4535C40.2688 28.7812 40.4337 29.1705 40.5383 29.6209C40.6435 30.0713 40.6356 30.5583 40.5147 31.0819C40.4121 31.5263 40.2474 31.9146 40.0204 32.2468C39.7938 32.5788 39.5085 32.8348 39.1664 33.0149C38.8242 33.195 38.4806 33.3415 38.137 33.4542C37.7937 33.567 37.3746 33.625 36.881 33.6279C36.3875 33.631 35.9587 33.624 35.5952 33.6068C35.2314 33.5897 34.785 33.5328 34.2558 33.4355C33.7265 33.3383 33.326 33.2628 33.0545 33.2084C32.7829 33.154 32.414 33.0688 31.9476 32.9529C31.481 32.8369 31.2086 32.7696 31.1291 32.7513L32.8161 25.4439L32.8158 25.444ZM39.0829 43.9641C38.8475 44.2943 38.5801 44.5671 38.2799 44.7821C37.9795 44.9964 37.6109 45.1623 37.1748 45.2786C36.7386 45.3955 36.3229 45.4747 35.929 45.5175C35.5344 45.5606 35.0683 45.5694 34.5311 45.546C33.9927 45.5221 33.5253 45.4848 33.1269 45.4348C32.7291 45.3849 32.2579 45.3094 31.7126 45.2088C31.1679 45.1076 30.7443 45.0226 30.4429 44.953C30.1414 44.8834 29.7615 44.7911 29.3031 44.6771C28.8443 44.5634 28.552 44.4917 28.4249 44.4623L30.2824 36.4167C30.4092 36.446 30.7879 36.5253 31.4186 36.6539C32.0493 36.7826 32.5625 36.8933 32.9592 36.9849C33.3559 37.0764 33.8981 37.2263 34.5855 37.4355C35.2724 37.6439 35.8432 37.8505 36.2976 38.0558C36.7515 38.261 37.237 38.5274 37.7549 38.8562C38.2723 39.1845 38.6729 39.5318 38.9561 39.898C39.2392 40.2648 39.4485 40.6969 39.5838 41.1963C39.7198 41.6955 39.7215 42.2309 39.5896 42.8023C39.4868 43.2471 39.3183 43.6337 39.0829 43.9641Z" fill="#FF6C00"></path></g><path d="M0 0H64V64H0V0Z" fill="url(#svg-502855479_24508_paint0_linear_866_7726)"></path><g opacity="0.6" filter="url(#svg-502855479_24508_filter2_f_866_7726)"><path d="M46.7652 39.8458C46.1198 38.4435 44.9199 37.3057 43.1657 36.4328C45.8086 35.7726 47.3204 33.9655 47.7019 31.0113C47.8483 29.9419 47.7684 28.9673 47.4618 28.0861C47.155 27.2047 46.6439 26.435 45.9263 25.7764C45.2095 25.1173 44.3945 24.5534 43.4838 24.0841C42.5728 23.6147 41.503 23.1796 40.275 22.7792L41.6598 16.781L40.5383 15.2644L37.9945 15.9348L36.6482 21.7664C36.0135 21.6199 35.0419 21.4123 33.7335 21.1436L35.0909 15.2644L33.9802 13.6463L31.4251 14.4181L30.0403 20.4164C29.5128 20.3114 28.7414 20.1418 27.7259 19.9074L22.6854 18.7184L20.7298 21.0404L21.1453 22.2471L24.4261 23.232C25.6321 23.5104 26.2137 24.2131 26.1708 25.3396L24.5937 32.1711C24.7526 32.2078 24.8775 32.2452 24.9691 32.283L24.5881 32.1951L22.3791 41.7633C22.0655 42.5431 21.5119 42.8418 20.7184 42.6586L18.0767 42.0487L15.7202 44.6772L16.5141 46.0647L21.0936 47.3334C21.3952 47.403 21.8303 47.5077 22.4002 47.6468C22.9695 47.7867 23.3969 47.8896 23.6826 47.9555L21.2776 52.4159L22.2813 54.0251L25.9476 54.8715L27.3324 48.8733C27.995 49.0434 28.9611 49.2746 30.2306 49.5677L27.8936 54.0251L28.8513 55.5419L32.5166 56.3881L33.9179 50.3186C35.234 50.5557 36.4157 50.7038 37.4633 50.7611C38.5114 50.8186 39.5388 50.768 40.5451 50.6072C41.5512 50.447 42.4279 50.1602 43.1749 49.7476C43.9221 49.3356 44.5965 48.7472 45.1997 47.9838C45.8016 47.22 46.2888 46.2878 46.6596 45.1865C47.3759 43.0292 47.4107 41.2487 46.7652 39.8458ZM32.8158 25.444C32.9269 25.4696 33.2413 25.538 33.7588 25.649C34.2767 25.76 34.7068 25.851 35.0498 25.9218C35.3928 25.9927 35.8484 26.1188 36.4168 26.3002C36.985 26.4815 37.4582 26.6577 37.8365 26.8285C38.2148 26.9993 38.6214 27.2311 39.0548 27.5234C39.4892 27.8157 39.8185 28.1258 40.0433 28.4535C40.2688 28.7812 40.4337 29.1705 40.5383 29.6209C40.6435 30.0713 40.6356 30.5583 40.5147 31.0819C40.4121 31.5263 40.2474 31.9146 40.0204 32.2468C39.7938 32.5788 39.5085 32.8348 39.1664 33.0149C38.8242 33.195 38.4806 33.3415 38.137 33.4542C37.7937 33.567 37.3746 33.625 36.881 33.6279C36.3875 33.631 35.9587 33.624 35.5952 33.6068C35.2314 33.5897 34.785 33.5328 34.2558 33.4355C33.7265 33.3383 33.326 33.2628 33.0545 33.2084C32.7829 33.154 32.414 33.0688 31.9476 32.9529C31.481 32.8369 31.2086 32.7696 31.1291 32.7513L32.8161 25.4439L32.8158 25.444ZM39.0829 43.9641C38.8475 44.2943 38.5801 44.5671 38.2799 44.7821C37.9795 44.9964 37.6109 45.1623 37.1748 45.2786C36.7386 45.3955 36.3229 45.4747 35.929 45.5175C35.5344 45.5606 35.0683 45.5694 34.5311 45.546C33.9927 45.5221 33.5253 45.4848 33.1269 45.4348C32.7291 45.3849 32.2579 45.3094 31.7126 45.2088C31.1679 45.1076 30.7443 45.0226 30.4429 44.953C30.1414 44.8834 29.7615 44.7911 29.3031 44.6771C28.8443 44.5634 28.552 44.4917 28.4249 44.4623L30.2824 36.4167C30.4092 36.446 30.7879 36.5253 31.4186 36.6539C32.0493 36.7826 32.5625 36.8933 32.9592 36.9849C33.3559 37.0764 33.8981 37.2263 34.5855 37.4355C35.2724 37.6439 35.8432 37.8505 36.2976 38.0558C36.7515 38.261 37.237 38.5274 37.7549 38.8562C38.2723 39.1845 38.6729 39.5318 38.9561 39.898C39.2392 40.2648 39.4485 40.6969 39.5838 41.1963C39.7198 41.6955 39.7215 42.2309 39.5896 42.8023C39.4868 43.2471 39.3183 43.6337 39.0829 43.9641Z" fill="black" fill-opacity="0.29"></path></g><path d="M46.765 37.3459C46.1195 35.9436 44.9197 34.8058 43.1654 33.9329C45.8084 33.2727 47.3201 31.4655 47.7016 28.5113C47.8481 27.4419 47.7682 26.4674 47.4616 25.5862C47.1547 24.7047 46.6437 23.9351 45.9261 23.2764C45.2092 22.6173 44.3943 22.0534 43.4836 21.5841C42.5726 21.1148 41.5028 20.6797 40.2747 20.2793L41.6344 14.3901C41.6504 14.3207 41.636 14.2478 41.5949 14.1896L40.5693 12.7386L37.9943 13.4348L36.648 19.2665C36.0133 19.1199 35.0417 18.9123 33.7333 18.6437L35.0654 12.8735C35.0815 12.8041 35.0671 12.7312 35.0261 12.6731L33.9649 11.1704L31.4249 11.9182L30.0401 17.9164C29.5126 17.8114 28.7412 17.6419 27.7257 17.4074L22.6852 16.2184L20.8988 18.5019L21.2262 19.7278C21.2492 19.8137 21.316 19.881 21.4018 19.9045L24.4259 20.7321C25.6319 21.0105 26.2134 21.7132 26.1706 22.8397L24.5934 29.6711C24.7523 29.7078 24.8773 29.7453 24.9689 29.7831L24.5879 29.6951L22.3789 39.2634C22.0653 40.0432 21.5117 40.3419 20.7182 40.1587L18.0765 39.5488L15.8659 42.15L16.5138 43.5647L21.1076 44.756C21.4091 44.8256 21.8266 44.9495 22.3965 45.0886C22.9658 45.2285 23.3966 45.3896 23.6823 45.4556L21.341 49.8264L22.2271 51.4277C22.2614 51.4897 22.3205 51.5342 22.3896 51.5502L25.7038 52.3153C25.8383 52.3464 25.9726 52.2625 26.0036 52.128L27.3322 46.3734C27.9947 46.5435 28.9608 46.7747 30.2303 47.0678L27.9321 51.3805L28.7971 52.9444C28.8315 53.0065 28.8905 53.0511 28.9597 53.067L32.2728 53.8319C32.4073 53.863 32.5416 53.7791 32.5726 53.6446L33.9177 47.8186C35.2338 48.0557 36.4154 48.2038 37.4631 48.2612C38.5112 48.3187 39.5385 48.268 40.5448 48.1073C41.5509 47.947 42.4277 47.6602 43.1747 47.2477C43.9219 46.8357 44.5963 46.2473 45.1995 45.4838C45.8014 44.72 46.2885 43.7879 46.6594 42.6865C47.3757 40.5292 47.4105 38.7487 46.765 37.3459ZM32.9414 22.9697C33.0525 22.9954 33.241 23.038 33.7586 23.1491C34.2764 23.26 34.7065 23.3511 35.0495 23.4218C35.3926 23.4928 35.8482 23.6189 36.4166 23.8002C36.9848 23.9815 37.458 24.1578 37.8363 24.3285C38.2146 24.4993 38.6211 24.7311 39.0546 25.0234C39.489 25.3157 39.8182 25.6259 40.0431 25.9535C40.2685 26.2813 40.4335 26.6705 40.5381 27.1209C40.6432 27.5714 40.6353 28.0584 40.5144 28.582C40.4118 29.0263 40.2471 29.4146 40.0202 29.7468C39.7935 30.0789 39.5082 30.3348 39.1662 30.5149C38.824 30.6951 38.4804 30.8416 38.1367 30.9543C37.7934 31.0671 37.3743 31.125 36.8808 31.128C36.3872 31.1311 35.9585 31.124 35.595 31.1069C35.2311 31.0898 34.7848 31.0328 34.2556 30.9356C33.7263 30.8383 33.3257 30.7629 33.0543 30.7085C32.7826 30.654 32.4138 30.5689 31.9473 30.4529C31.4808 30.337 31.2083 30.2697 31.1288 30.2513L32.787 23.0688C32.803 22.9994 32.8715 22.9554 32.9414 22.9697V22.9697ZM39.0827 41.4641C38.8473 41.7944 38.5799 42.0671 38.2797 42.2822C37.9792 42.4964 37.6107 42.6623 37.1745 42.7786C36.7383 42.8955 36.3227 42.9747 35.9287 43.0175C35.5341 43.0607 35.0681 43.0694 34.5308 43.046C33.9924 43.0221 33.525 42.9848 33.1266 42.9349C32.7289 42.8849 32.2576 42.8094 31.7123 42.7088C31.1676 42.6077 30.7441 42.5226 30.4427 42.453C30.1411 42.3834 29.7612 42.2911 29.3028 42.1771C28.8441 42.0634 28.5517 41.9917 28.4247 41.9624L30.2259 34.1604C30.2569 34.0259 30.3912 33.9413 30.5263 33.9698C30.7237 34.0115 31.021 34.0729 31.4183 34.1539C32.049 34.2827 32.5622 34.3933 32.959 34.4849C33.3556 34.5765 33.8979 34.7264 34.5853 34.9356C35.2722 35.1439 35.8429 35.3506 36.2974 35.5558C36.7513 35.761 37.2367 36.0275 37.7546 36.3562C38.272 36.6845 38.6726 37.0318 38.9559 37.3981C39.239 37.7648 39.4482 38.1969 39.5836 38.6963C39.7195 39.1956 39.7213 39.7309 39.5893 40.3023C39.4866 40.7471 39.318 41.1337 39.0827 41.4641Z" fill="#F6E4CD"></path><g style="mix-blend-mode:multiply" opacity="0.3" filter="url(#svg-502855479_24508_filter3_f_866_7726)"><ellipse cx="3.60205" cy="11.4358" rx="3.60205" ry="11.4358" transform="matrix(-0.99146 0.130413 0.130413 0.99146 45.229 22.1821)" fill="#FF9C11"></ellipse></g><g style="mix-blend-mode:multiply" opacity="0.3" filter="url(#svg-502855479_24508_filter4_f_866_7726)"><ellipse cx="1.91393" cy="13.0249" rx="1.91393" ry="13.0249" transform="matrix(-0.965926 -0.258819 -0.258819 0.965926 37.0537 19.4414)" fill="#FF9C11"></ellipse></g><path d="M45.7609 35.7418C45.1155 34.3395 43.9156 33.2017 42.1614 32.3288C44.8043 31.6686 46.3161 29.8615 46.6976 26.9073C46.844 25.8379 46.7641 24.8633 46.4575 23.9821C46.1507 23.1007 45.6396 22.331 44.922 21.6724C44.2052 21.0133 43.3902 20.4494 42.4795 19.9801C41.5685 19.5107 40.4987 19.0756 39.2707 18.6752L40.5993 12.9205C40.6303 12.786 40.5464 12.6518 40.4119 12.6207L37.2338 11.887C37.0993 11.8559 36.9651 11.9398 36.934 12.0744L35.6439 17.6624C35.0092 17.5158 34.0376 17.3082 32.7292 17.0396L34.0303 11.404C34.0614 11.2695 33.9775 11.1352 33.843 11.1042L30.6644 10.3703C30.5299 10.3393 30.3956 10.4232 30.3646 10.5577L29.036 16.3124C28.5085 16.2073 27.7371 16.0378 26.7216 15.8033L21.6811 14.6144L20.8361 18.2745C20.8051 18.409 20.889 18.5432 21.0235 18.5743L23.4218 19.128C24.6278 19.4064 25.2094 20.1091 25.1665 21.2356L23.5894 28.067L23.5838 28.08L23.5838 28.0911L21.3748 37.6593C21.0612 38.4391 20.5076 38.7378 19.7141 38.5546L17.3001 37.9973C17.1719 37.9677 17.0428 38.0425 17.0046 38.1683L15.8519 41.9697C15.81 42.108 15.8937 42.2529 16.0345 42.2857L20.0893 43.2294C20.3909 43.299 20.826 43.4037 21.3959 43.5428C21.9652 43.6827 22.3926 43.7855 22.6783 43.8515L21.3332 49.6775C21.3022 49.812 21.3861 49.9462 21.5206 49.9773L24.6997 50.7113C24.8343 50.7423 24.9685 50.6584 24.9996 50.5239L26.3281 44.7693C26.9907 44.9394 27.9568 45.1706 29.2263 45.4637L27.9032 51.1943C27.8722 51.3288 27.9561 51.463 28.0906 51.4941L31.2688 52.2278C31.4033 52.2589 31.5375 52.175 31.5686 52.0405L32.9136 46.2145C34.2297 46.4516 35.4114 46.5997 36.459 46.6571C37.5071 46.7146 38.5345 46.6639 39.5408 46.5032C40.5469 46.3429 41.4236 46.0561 42.1706 45.6436C42.9178 45.2316 43.5922 44.6432 44.1954 43.8797C44.7973 43.116 45.2845 42.1838 45.6553 41.0825C46.3716 38.9252 46.4064 37.1446 45.7609 35.7418ZM31.7134 21.7678C31.7676 21.5316 32.0033 21.3829 32.2401 21.4342C32.3805 21.4646 32.5519 21.5015 32.7545 21.545C33.2724 21.6559 33.7025 21.747 34.0455 21.8177C34.3885 21.8887 34.8441 22.0148 35.4125 22.1961C35.9807 22.3775 36.4539 22.5537 36.8322 22.7245C37.2105 22.8952 37.6171 23.127 38.0506 23.4193C38.4849 23.7117 38.8142 24.0218 39.039 24.3494C39.2645 24.6772 39.4294 25.0665 39.534 25.5169C39.6392 25.9673 39.6313 26.4543 39.5104 26.9779C39.4078 27.4222 39.2431 27.8105 39.0161 28.1428C38.7895 28.4748 38.5042 28.7308 38.1621 28.9108C37.8199 29.091 37.4763 29.2375 37.1327 29.3502C36.7893 29.463 36.3703 29.521 35.8767 29.5239C35.3832 29.527 34.9544 29.52 34.5909 29.5028C34.2271 29.4857 33.7807 29.4288 33.2515 29.3315C32.7222 29.2343 32.3217 29.1588 32.0502 29.1044C31.7786 29.0499 31.4097 28.9648 30.9433 28.8488C30.6976 28.7878 30.5058 28.7402 30.3676 28.7062C30.2336 28.6732 30.1499 28.5382 30.181 28.4036L31.7134 21.7678V21.7678ZM38.0786 39.86C37.8432 40.1903 37.5758 40.463 37.2756 40.6781C36.9752 40.8924 36.6066 41.0582 36.1705 41.1745C35.7343 41.2914 35.3186 41.3707 34.9247 41.4134C34.5301 41.4566 34.064 41.4654 33.5268 41.442C32.9884 41.418 32.521 41.3807 32.1226 41.3308C31.7248 41.2809 31.2536 41.2054 30.7083 41.1048C30.1636 41.0036 29.74 40.9185 29.4386 40.849C29.1371 40.7793 28.7572 40.6871 28.2988 40.5731C28.03 40.5064 27.8184 40.4542 27.6636 40.4165C27.5295 40.3838 27.4458 40.2492 27.4768 40.1147L29.1656 32.7999C29.2277 32.5308 29.4966 32.3608 29.767 32.4169C29.9406 32.4529 30.1564 32.4973 30.4142 32.5498C31.045 32.6786 31.5581 32.7892 31.9549 32.8808C32.3516 32.9724 32.8938 33.1223 33.5812 33.3315C34.2681 33.5398 34.8389 33.7465 35.2933 33.9517C35.7472 34.157 36.2327 34.4234 36.7506 34.7522C37.268 35.0804 37.6685 35.4277 37.9518 35.794C38.2349 36.1607 38.4442 36.5929 38.5795 37.0922C38.7155 37.5915 38.7172 38.1269 38.5853 38.6983C38.4825 39.143 38.3139 39.5297 38.0786 39.86Z" fill="#FFFDF9"></path><g opacity="0.61" filter="url(#svg-502855479_24508_filter5_f_866_7726)"><path d="M42.0151 31.7234L44.133 29.9792C45.4599 28.8865 46.1325 27.1888 45.9139 25.4838L45.6401 23.3484" stroke="#FEA432"></path></g><g opacity="0.5" filter="url(#svg-502855479_24508_filter6_f_866_7726)"><path d="M38.8257 29.8751L39.4347 29.0986C40.3158 27.9752 40.6746 26.5287 40.4207 25.1237L40.072 23.1946" stroke="white"></path></g><g opacity="0.5" filter="url(#svg-502855479_24508_filter7_f_866_7726)"><path d="M37.6906 41.4307L38.4458 40.7954C39.5384 39.8765 40.1861 38.5342 40.2255 37.107L40.2796 35.1474" stroke="white"></path></g><g opacity="0.3" filter="url(#svg-502855479_24508_filter8_f_866_7726)"><path d="M25.2516 23.1946L25.5246 22.3669C25.8719 21.3141 25.7732 20.165 25.2515 19.1868V19.1868" stroke="#FEA432" stroke-width="0.5"></path></g><g opacity="0.3" filter="url(#svg-502855479_24508_filter9_f_866_7726)"><path d="M20.147 40.1757V40.1757C21.11 39.8227 21.888 39.0932 22.3023 38.155L22.5078 37.6895" stroke="#FEA432" stroke-width="0.5"></path></g><g opacity="0.61" filter="url(#svg-502855479_24508_filter10_f_866_7726)"><path d="M31.1911 21.2695L29.5962 28.0682" stroke="#FEA432"></path></g><g opacity="0.34" filter="url(#svg-502855479_24508_filter11_f_866_7726)"><path d="M38.2041 22.7698L32.2612 20.9236" stroke="#FEA432"></path></g><g opacity="0.34" filter="url(#svg-502855479_24508_filter12_f_866_7726)"><path d="M36.5522 33.4484L30.6093 31.6022" stroke="#FEA432"></path></g><g opacity="0.3" filter="url(#svg-502855479_24508_filter13_f_866_7726)"><path d="M21.4448 50.0269L22.5078 51.6196" stroke="#FEA432"></path></g><g opacity="0.3" filter="url(#svg-502855479_24508_filter14_f_866_7726)"><path d="M28.2534 51.6196L29.3164 53.2124" stroke="#FEA432"></path></g><g opacity="0.5" filter="url(#svg-502855479_24508_filter15_f_866_7726)"><path d="M26.7831 20.2478L22.5078 37.9535" stroke="white"></path></g><g opacity="0.61" filter="url(#svg-502855479_24508_filter16_f_866_7726)"><path d="M28.2534 32.1339L26.6585 38.9326" stroke="#FEA432"></path></g><g filter="url(#svg-502855479_24508_filter17_f_866_7726)"><path d="M30.9597 51.6195L32.2613 46.3438" stroke="#FEA432" stroke-width="0.5"></path></g><g opacity="0.61" filter="url(#svg-502855479_24508_filter18_f_866_7726)"><path d="M39.8228 45.4258L42.9764 42.79C44.2829 41.698 44.9438 40.0162 44.7304 38.327L44.3008 34.9258" stroke="#FEA432"></path></g></g></g><defs><filter id="svg-502855479_24508_filter0_d_866_7726" x="-7.61905" y="0" width="79.2381" height="79.2381" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="7.61905"></feOffset><feGaussianBlur stdDeviation="3.80952"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix type="matrix" values="0 0 0 0 0.996078 0 0 0 0 0.662745 0 0 0 0 0.203922 0 0 0 0.32 0"></feColorMatrix><feBlend mode="overlay" in2="BackgroundImageFix" result="effect1_dropShadow_866_7726"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_866_7726" result="shape"></feBlend></filter><filter id="svg-502855479_24508_filter1_f_866_7726" x="11.7202" y="9.64636" width="40.0528" height="50.7417" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter2_f_866_7726" x="7.72015" y="5.64636" width="48.0528" height="58.7417" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="4" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter3_f_866_7726" x="36.7779" y="20.142" width="12.7424" height="27.696" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter4_f_866_7726" x="25.4885" y="16.4362" width="12.6909" height="30.182" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter5_f_866_7726" x="39.1973" y="20.7848" width="9.75726" height="13.8246" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter6_f_866_7726" x="35.9323" y="20.6057" width="7.56815" height="12.0779" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter7_f_866_7726" x="34.8687" y="32.6335" width="8.41068" height="11.6798" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter8_f_866_7726" x="22.5142" y="16.5691" width="5.96463" height="9.20386" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter9_f_866_7726" x="17.561" y="35.0885" width="7.67554" height="7.8219" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter10_f_866_7726" x="26.6094" y="18.6554" width="7.56845" height="12.027" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter11_f_866_7726" x="29.6129" y="17.946" width="11.2396" height="7.80127" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter12_f_866_7726" x="27.9609" y="28.6246" width="11.2396" height="7.80127" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter13_f_866_7726" x="20.0289" y="48.7493" width="3.89478" height="4.14795" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="0.5" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter14_f_866_7726" x="26.8375" y="50.342" width="3.89478" height="4.14795" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="0.5" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter15_f_866_7726" x="19.5218" y="17.6305" width="10.2473" height="22.9404" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter16_f_866_7726" x="23.6717" y="29.5198" width="7.56845" height="12.027" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter17_f_866_7726" x="28.2169" y="43.7838" width="6.78702" height="10.3956" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><filter id="svg-502855479_24508_filter18_f_866_7726" x="37.0022" y="32.3632" width="10.7677" height="15.9463" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur stdDeviation="1.25" result="effect1_foregroundBlur_866_7726"></feGaussianBlur></filter><linearGradient id="svg-502855479_24508_paint0_linear_866_7726" x1="32" y1="0" x2="19.125" y2="61.875" gradientUnits="userSpaceOnUse"><stop stop-color="#FFB018"></stop><stop offset="1" stop-color="#FF7E05"></stop></linearGradient><clipPath id="svg-502855479_24508_clip0_866_7726"><rect width="64" height="64" rx="13.3333" fill="white"></rect></clipPath></defs></svg>
+                        <p class="appName">Bitcoin</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Etherium.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Etherium</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Monero.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Monero</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Meshtastic.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Meshtastic</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Cypher Editor.png" style="height:100%; width:100%; object-fit: contain; border-radius:13px;">
+                        <p class="appName">Cypher Editor</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Ubuntu.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Ubuntu</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Tails.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Tails</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/OneDrive.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">OneDrive</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/GoogleDrive.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Google Drive</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Dropbox.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Dropbox</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Nextcloud.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Nextcloud</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/OpenVPN.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">OpenVPN</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/WireGuard.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">WireGuard</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/PiHole.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">PiHole</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                    <svg width="60" height="61" viewBox="0 0 60 61" fill="none" id="svg-talescale"><g clip-path="url(#svg-1653992833_2884_clip0_832_12435)"><path d="M60.0016 0.804199H0.00146484V60.8042H60.0016V0.804199Z" fill="#1F2124"></path><mask id="svg-1653992833_2884_mask0_832_12435" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="61" height="61"><path d="M60.0026 0.803223H0.00244141V60.8032H60.0026V0.803223Z" fill="#C4C4C4"></path></mask><g mask="url(#svg-1653992833_2884_mask0_832_12435)"><path d="M16.0021 21.3109C18.5992 21.3109 20.7046 19.2045 20.7046 16.6061C20.7046 14.0078 18.5992 11.9014 16.0021 11.9014C13.405 11.9014 11.2996 14.0078 11.2996 16.6061C11.2996 19.2045 13.405 21.3109 16.0021 21.3109Z" fill="#54514D"></path><path d="M16.0021 35.3379C18.5992 35.3379 20.7046 33.2313 20.7046 30.6331C20.7046 28.0348 18.5992 25.9282 16.0021 25.9282C13.405 25.9282 11.2996 28.0348 11.2996 30.6331C11.2996 33.2313 13.405 35.3379 16.0021 35.3379Z" fill="#FFFEFA"></path><path d="M16.0021 49.6265C18.5992 49.6265 20.7046 47.5199 20.7046 44.9216C20.7046 42.3231 18.5992 40.2168 16.0021 40.2168C13.405 40.2168 11.2996 42.3231 11.2996 44.9216C11.2996 47.5199 13.405 49.6265 16.0021 49.6265Z" fill="#54514D"></path><path d="M30.1083 35.3379C32.7054 35.3379 34.8108 33.2313 34.8108 30.6331C34.8108 28.0348 32.7054 25.9282 30.1083 25.9282C27.5112 25.9282 25.4058 28.0348 25.4058 30.6331C25.4058 33.2313 27.5112 35.3379 30.1083 35.3379Z" fill="#FFFEFA"></path><path d="M30.1083 49.6265C32.7054 49.6265 34.8108 47.5199 34.8108 44.9216C34.8108 42.3231 32.7054 40.2168 30.1083 40.2168C27.5112 40.2168 25.4058 42.3231 25.4058 44.9216C25.4058 47.5199 27.5112 49.6265 30.1083 49.6265Z" fill="#FFFEFA"></path><path d="M30.1083 21.3109C32.7054 21.3109 34.8108 19.2045 34.8108 16.6061C34.8108 14.0078 32.7054 11.9014 30.1083 11.9014C27.5112 11.9014 25.4058 14.0078 25.4058 16.6061C25.4058 19.2045 27.5112 21.3109 30.1083 21.3109Z" fill="#54514D"></path><path d="M44.0419 21.3109C46.639 21.3109 48.7444 19.2045 48.7444 16.6061C48.7444 14.0078 46.639 11.9014 44.0419 11.9014C41.4447 11.9014 39.3394 14.0078 39.3394 16.6061C39.3394 19.2045 41.4447 21.3109 44.0419 21.3109Z" fill="#54514D"></path><path d="M44.0426 35.3379C46.6397 35.3379 48.7451 33.2313 48.7451 30.6331C48.7451 28.0348 46.6397 25.9282 44.0426 25.9282C41.4455 25.9282 39.3401 28.0348 39.3401 30.6331C39.3401 33.2313 41.4455 35.3379 44.0426 35.3379Z" fill="#FFFEFA"></path><path d="M44.0426 49.6265C46.6397 49.6265 48.7451 47.5199 48.7451 44.9216C48.7451 42.3231 46.6397 40.2168 44.0426 40.2168C41.4455 40.2168 39.3401 42.3231 39.3401 44.9216C39.3401 47.5199 41.4455 49.6265 44.0426 49.6265Z" fill="#54514D"></path></g></g><rect x="0.118164" y="0.921875" width="59.7657" height="59.7656" rx="13.0078" stroke="black" stroke-opacity="0.2" stroke-width="0.234375"></rect><defs><clipPath id="svg-1653992833_2884_clip0_832_12435"><rect x="0.000976562" y="0.804688" width="60.0001" height="60" rx="13.125" fill="white"></rect></clipPath></defs></svg>
+                        <p class="appName">Tailscale</p>
+                    </div>
+                </div>
+
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg style="border-radius:13px;" width="64" height="64" viewBox="0 0 64 64" fill="none" id="svg-plex"><path d="M64 0H0V64H64V0Z" fill="url(#svg1676987305_798_paint0_radial_866_7764)"></path><path d="M18.75 10.25H31.3482L45.25 32L31.3482 53.75H18.75L32.6517 32L18.75 10.25Z" fill="url(#svg1676987305_798_paint1_radial_866_7764)"></path><defs><radialGradient id="svg1676987305_798_paint0_radial_866_7764" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(32 32) rotate(90) scale(32)"><stop stop-color="#281B07"></stop><stop offset="1" stop-color="#0E0C08"></stop></radialGradient><radialGradient id="svg1676987305_798_paint1_radial_866_7764" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(42.3772 31.888) scale(24.5129 40.2368)"><stop stop-color="#F9BE03"></stop><stop offset="1" stop-color="#CC7C19"></stop></radialGradient></defs></svg>
+                        <p class="appName">Plex</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                    <svg width="60" height="61" viewBox="0 0 60 61" fill="none" id="svg-Samaurai"><g clip-path="url(#svg-2095558680_3050_clip0_832_12387)"><path d="M60.0005 0.20874H0.000976562V60.2083H60.0005V0.20874Z" fill="url(#svg-2095558680_3050_paint0_linear_832_12387)"></path><mask id="svg-2095558680_3050_mask0_832_12387" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="61" height="61"><path d="M60.0005 0.20874H0.000976562V60.2083H60.0005V0.20874Z" fill="url(#svg-2095558680_3050_paint1_linear_832_12387)"></path></mask><g mask="url(#svg-2095558680_3050_mask0_832_12387)"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.0845 26.7422C16.9191 26.9463 18.1487 26.663 19.9834 26.8671C19.9834 26.7992 21.6765 27.0624 21.9467 27.2749C24.0044 27.2749 22.1676 23.8451 21.9467 22.9887C21.7166 21.6297 22.9188 19.8041 24.2528 19.6211C25.2728 19.4812 25.6504 19.5347 26.4864 20.0021C27.5005 20.8561 27.5584 21.4331 27.9803 22.4885C28.535 23.8763 26.8961 26.4553 28.7553 27.3047C34.1773 29.2809 34.7501 37.0647 34.5697 44.7125C34.8083 46.5017 35.329 46.8076 36.3678 47.637C39.9919 50.2121 48.0286 49.894 51.7975 52.463C51.6735 52.8211 51.7595 52.6613 51.6009 52.8715C51.4286 53.427 51.2652 53.4715 51.0112 53.8927C50.7981 53.7071 50.9945 53.9086 50.8145 53.6883C47.3346 51.4355 38.8692 51.215 35.1235 49.2259C35.1235 49.2938 36.5122 50.4347 36.5122 50.4347C38.5564 52.5554 40.8926 56.9719 41.4267 60.4427C39.2553 60.3314 35.6154 60.4427 33.1702 60.4427H15.8709V60.2383C16.7227 58.128 18.677 57.2177 19.5288 55.1074C19.9555 54.3992 21.4094 51.9809 21.8625 51.3664C22.6391 50.3129 24.6292 47.4629 25.1169 45.9167C23.6404 45.3767 21.1312 40.593 20.6146 37.9607C17.0845 36.9531 8.23148 34.7662 8.95703 32.2833C9.35766 31.7114 12.0685 29.2723 11.3495 28.7845C10.6448 26.7827 8.46782 26.8383 8.2041 24.087C9.3245 22.6295 8.55388 22.7694 11.1529 22.2488C12.4361 23.0077 13.8335 21.627 13.905 20.8191C15.7236 20.1297 15.7567 19.9039 15.8709 19.5936C16.9099 19.6232 17.1718 20.5154 17.1718 20.5154C19.2153 20.0164 26.7953 17.0581 29.645 16.1708C32.495 15.2835 39.6835 12.9891 42.9087 11.8907C45.5348 10.9963 47.7468 10.0894 51.3618 10.0525V10.2567C51.2036 10.4653 51.4886 9.9042 51.3618 10.2567C49.3964 10.6656 47.0901 11.591 45.4643 12.095C41.0609 13.4598 32.8998 16.2537 28.6621 17.6005C26.9891 18.1322 16.7981 21.5043 17.7897 22.3034C17.0199 23.3064 15.2705 25.2462 15.0845 26.7422Z" fill="white"></path></g></g><rect x="0.134906" y="0.34267" width="59.7317" height="59.7317" rx="11.866" stroke="black" stroke-opacity="0.2" stroke-width="0.267859"></rect><defs><linearGradient id="svg-2095558680_3050_paint0_linear_832_12387" x1="30.0007" y1="0.20874" x2="30.0007" y2="60.2083" gradientUnits="userSpaceOnUse"><stop stop-color="#C12526"></stop><stop offset="1" stop-color="#9D1E1F"></stop></linearGradient><linearGradient id="svg-2095558680_3050_paint1_linear_832_12387" x1="30.0007" y1="0.20874" x2="30.0007" y2="60.2083" gradientUnits="userSpaceOnUse"><stop stop-color="#C12526"></stop><stop offset="1" stop-color="#9D1E1F"></stop></linearGradient><clipPath id="svg-2095558680_3050_clip0_832_12387"><rect x="0.000976562" y="0.20874" width="59.9995" height="59.9995" rx="11.9999" fill="white"></rect></clipPath></defs></svg>
+                        <p class="appName">Samaurai</p>
+                    </div>
+                </div>
+
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                    <svg width="60" height="61" viewBox="0 0 60 61" fill="none" id="svg-Ghostfolio"><g clip-path="url(#svg1353469617_2713_clip0_832_12399)"><rect x="0.000976562" y="0.606934" width="60" height="60" rx="13.128" fill="url(#svg1353469617_2713_paint0_linear_832_12399)"></rect><g clip-path="url(#svg1353469617_2713_clip1_832_12399)"><g filter="url(#svg1353469617_2713_filter0_d_832_12399)"><path fill-rule="evenodd" clip-rule="evenodd" d="M41.9541 27.42V43.9903C41.9541 44.8575 40.876 45.3028 40.2432 44.6934L37.9697 42.3262L34.6885 45.6778C34.29 46.0762 33.6807 46.0762 33.2822 45.6778L30.001 42.3262L26.7197 45.6778C26.3213 46.0762 25.7119 46.0762 25.3135 45.6778L22.0322 42.3262L19.7588 44.6934C19.126 45.3028 18.0479 44.8575 18.0479 43.9903V27.3262C18.0479 20.7403 23.3916 15.3966 29.9775 15.3731C36.5635 15.3497 41.9541 20.8341 41.9541 27.42ZM28.0088 28.3106C28.0088 26.67 26.6728 25.3341 25.0088 25.3341C23.3682 25.3341 22.0322 26.67 22.0322 28.3106C22.0322 29.9747 23.3682 31.3106 25.0088 31.3106C26.6728 31.3106 28.0088 29.9747 28.0088 28.3106ZM37.9697 28.3106C37.9697 26.67 36.6338 25.3341 34.9697 25.3341C33.3291 25.3341 31.9932 26.67 31.9932 28.3106C31.9932 29.9747 33.3291 31.3106 34.9697 31.3106C36.6338 31.3106 37.9697 29.9747 37.9697 28.3106Z" fill="url(#svg1353469617_2713_paint1_linear_832_12399)" shape-rendering="crispEdges"></path></g></g></g><defs><filter id="svg1353469617_2713_filter0_d_832_12399" x="6.79785" y="11.1543" width="46.4062" height="53.1035" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="7.03125"></feOffset><feGaussianBlur stdDeviation="5.625"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.12 0"></feColorMatrix><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_832_12399"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_832_12399" result="shape"></feBlend></filter><linearGradient id="svg1353469617_2713_paint0_linear_832_12399" x1="30.001" y1="0.606934" x2="30.001" y2="60.6069" gradientUnits="userSpaceOnUse"><stop stop-color="#0C4E4B"></stop><stop offset="1" stop-color="#082524"></stop></linearGradient><linearGradient id="svg1353469617_2713_paint1_linear_832_12399" x1="30.001" y1="15.373" x2="30.001" y2="45.9766" gradientUnits="userSpaceOnUse"><stop stop-color="white"></stop><stop offset="1" stop-color="white" stop-opacity="0.8"></stop></linearGradient><clipPath id="svg1353469617_2713_clip0_832_12399"><rect x="0.000976562" y="0.606934" width="60" height="60" rx="13.128" fill="white"></rect></clipPath><clipPath id="svg1353469617_2713_clip1_832_12399"><rect width="60" height="60" fill="white" transform="translate(0.000976562 0.607422)"></rect></clipPath></defs></svg>
+                        <p class="appName">Ghostfolio</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                    <svg width="60" height="61" viewBox="0 0 60 61" fill="none" id="svg-Torq"><g clip-path="url(#svg-1857362033_2221_clip0_832_12404)"><rect x="0.000976562" y="0.207031" width="60" height="60" rx="13.12" fill="url(#svg-1857362033_2221_paint0_linear_832_12404)"></rect><g filter="url(#svg-1857362033_2221_filter0_d_832_12404)"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.3671 12.2397H27.7971V29.6054H21.3671V12.2397ZM17.856 12.2401H11.4259V29.6057H17.856V12.2401ZM48.6799 12.2401H31.3142V29.6057H48.6799V12.2401ZM42.2575 34.8123H37.736V39.8273H32.7215V44.3487H37.736V49.3635H42.2575V44.3487H47.2727V39.8273H42.2575V34.8123ZM19.6117 50.3772C24.1896 50.3772 27.9007 46.6661 27.9007 42.0883C27.9007 37.5104 24.1896 33.7993 19.6117 33.7993C15.0338 33.7993 11.3228 37.5104 11.3228 42.0883C11.3228 46.6661 15.0338 50.3772 19.6117 50.3772Z" fill="url(#svg-1857362033_2221_paint1_linear_832_12404)"></path></g></g><defs><filter id="svg-1857362033_2221_filter0_d_832_12404" x="4.76025" y="5.67725" width="67.3572" height="68.1377" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dx="8.4375" dy="8.4375"></feOffset><feGaussianBlur stdDeviation="7.5"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix type="matrix" values="0 0 0 0 0.156863 0 0 0 0 0.247059 0 0 0 0 0.352941 0 0 0 0.15 0"></feColorMatrix><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_832_12404"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_832_12404" result="shape"></feBlend></filter><linearGradient id="svg-1857362033_2221_paint0_linear_832_12404" x1="0.000976563" y1="0.207031" x2="57.3662" y2="57.3406" gradientUnits="userSpaceOnUse"><stop stop-color="white"></stop><stop offset="0.541668" stop-color="white"></stop><stop offset="1" stop-color="#DAE6F3"></stop></linearGradient><linearGradient id="svg-1857362033_2221_paint1_linear_832_12404" x1="11.3228" y1="12.2397" x2="48.6799" y2="50.3772" gradientUnits="userSpaceOnUse"><stop stop-color="#617B9B"></stop><stop offset="1" stop-color="#182D47"></stop></linearGradient><clipPath id="svg-1857362033_2221_clip0_832_12404"><rect x="0.000976562" y="0.207031" width="60" height="60" rx="13.12" fill="white"></rect></clipPath></defs></svg>
+                        <p class="appName">Torq</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg width="60" height="61" viewBox="0 0 60 61" fill="none" id="svg-LibreOffice"><rect x="0.000976562" y="0.605957" width="59.9997" height="59.9994" rx="13.1228" fill="#009B00"></rect><g filter="url(#svg15134282_2373_filter0_d_832_12424)"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.9404 15.3462V45.8626H42.0619V26.4805L30.9235 15.3462H17.9404ZM31.6624 12.769C31.8726 12.769 32.0743 12.8525 32.223 13.0012L44.4067 25.1805C44.5554 25.3292 44.639 25.531 44.639 25.7413V47.6468C44.639 48.0847 44.284 48.4397 43.846 48.4397H16.1563C15.7183 48.4397 15.3633 48.0847 15.3633 47.6468V13.562C15.3633 13.1241 15.7183 12.769 16.1563 12.769H31.6624Z" fill="url(#svg15134282_2373_paint0_linear_832_12424)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M36.8217 11.8467C36.4482 11.8467 36.1114 12.0717 35.9683 12.4168C35.8253 12.7619 35.9043 13.1592 36.1684 13.4234L43.9847 21.2442C44.2488 21.5084 44.6462 21.5876 44.9914 21.4446C45.3367 21.3017 45.5618 20.9648 45.5618 20.5912V12.7704C45.5618 12.2603 45.1482 11.8467 44.6381 11.8467H36.8217Z" fill="url(#svg15134282_2373_paint1_linear_832_12424)"></path></g><defs><filter id="svg15134282_2373_filter0_d_832_12424" x="13.4883" y="11.8467" width="41.4484" height="47.8432" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dx="3.74997" dy="5.62496"></feOffset><feGaussianBlur stdDeviation="2.81248"></feGaussianBlur><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"></feColorMatrix><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_832_12424"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_832_12424" result="shape"></feBlend></filter><linearGradient id="svg15134282_2373_paint0_linear_832_12424" x1="15.3612" y1="13.5847" x2="44.1197" y2="48.5905" gradientUnits="userSpaceOnUse"><stop stop-color="white"></stop><stop offset="0.770844" stop-color="white" stop-opacity="0.867292"></stop><stop offset="1" stop-color="white" stop-opacity="0.72"></stop></linearGradient><linearGradient id="svg15134282_2373_paint1_linear_832_12424" x1="35.8973" y1="12.0677" x2="43.2647" y2="22.9897" gradientUnits="userSpaceOnUse"><stop stop-color="white"></stop><stop offset="0.770844" stop-color="white" stop-opacity="0.867292"></stop><stop offset="1" stop-color="white" stop-opacity="0.72"></stop></linearGradient></defs></svg>
+                        <p class="appName">LibreOffice</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                    <svg width="60" height="61" viewBox="0 0 60 61" fill="none" id="svg-TriliumNotes"><g clip-path="url(#svg-1917023903_5452_clip0_832_12460)"><rect x="0.000976562" y="0.20459" width="60" height="60" rx="13.128" fill="url(#svg-1917023903_5452_paint0_linear_832_12460)"></rect><g filter="url(#svg-1917023903_5452_filter0_d_832_12460)"><path d="M42.4765 15.8211C40.1068 15.7478 38.879 16.8568 38.5824 16.9597C38.8522 16.4488 39.0327 16.1269 39.7226 15.4086C37.3761 15.384 35.2004 15.8918 33.5404 17.4448C31.3139 19.5275 31.487 21.2531 31.4825 21.2446C31.4829 21.2455 31.1312 20.1193 31.0257 18.9148C28.6028 22.2687 27.6462 26.7127 29.4831 30.0278C30.6234 27.2769 32.4341 24.9062 34.7676 23.0367C34.8445 21.0751 35.6336 19.4177 36.881 18.194C35.7554 19.5413 35.2587 21.0762 35.3088 22.6231C38.023 20.5982 41.3496 19.2486 45.0038 18.8058C42.3582 19.2919 39.9611 20.3464 37.866 21.7846C39.1773 22.3835 40.6749 22.4774 42.249 21.9292C40.7399 22.6364 39.0647 22.7521 37.3701 22.1362C35.866 23.2377 34.5283 24.5391 33.3786 25.9694C35.4197 26.6367 37.6524 26.4988 39.8742 25.3663C37.8346 26.6838 35.4384 27.1778 32.878 26.6168C31.8573 27.9866 31.0018 29.4579 30.3331 30.9742C31.1568 31.5815 34.7312 33.4869 40.8626 28.9654C39.9968 28.7096 39.2952 28.3478 39.2949 28.3472C39.3144 28.3559 39.9268 28.4121 41.7176 27.3393C43.3009 26.4134 44.6629 24.7362 45.6683 23.4307C44.8131 23.1156 44.147 22.7849 44.1467 22.7841C44.1463 22.7837 45.2519 22.8585 46.967 21.5456C48.4968 20.3745 50.2046 18.6769 50.2098 18.7249C50.2207 18.7351 46.4425 15.9436 42.4765 15.8211" fill="url(#svg-1917023903_5452_paint1_linear_832_12460)"></path><path d="M15.1643 21.9205C16.9626 21.3978 18.1077 22.0013 18.3538 22.0212C18.0524 21.6848 17.8544 21.4751 17.1932 21.0635C18.9827 20.5824 20.7407 20.5406 22.2991 21.3972C24.3894 22.5462 24.5782 23.8957 24.5801 23.8884C24.5798 23.8892 24.6392 22.9614 24.4956 22.0224C26.9727 24.1016 28.5316 27.3006 27.7442 30.1896C26.3603 28.3174 24.5343 26.8671 22.402 25.9018C21.9781 24.4218 21.066 23.3137 19.8845 22.6268C20.996 23.4319 21.6615 24.5041 21.9113 25.6931C19.459 24.6844 16.6642 24.3112 13.7878 24.6938C15.9012 24.5431 20.3778 24.8493 24.0102 27.8635C22.5739 28.7745 20.8411 29.1094 18.9316 28.684C20.7363 29.2861 22.6603 29.1907 24.5135 28.2584C25.549 29.1014 26.4771 30.0544 27.2708 31.0785C26.754 31.7038 24.3758 33.8605 18.8458 31.6222C19.4602 31.2566 19.9292 30.8424 19.9294 30.8419C19.9162 30.8523 19.4584 31.016 17.8892 30.5512C16.5063 30.1574 15.1528 29.1472 14.1408 28.3501C14.7361 27.9415 15.1839 27.5582 15.1839 27.5575C15.1841 27.5571 14.3528 27.832 12.797 27.1693C11.4092 26.5779 9.7873 25.6205 9.79225 25.6581C9.78589 25.668 12.1549 22.7955 15.1643 21.9205" fill="url(#svg-1917023903_5452_paint2_linear_832_12460)"></path><path d="M28.073 46.6462C26.7616 45.4259 26.7055 44.1833 26.6021 43.971C26.4691 44.3864 26.3911 44.6535 26.371 45.4024C25.0983 44.1687 24.2068 42.7426 24.1599 41.0337C24.0972 38.7422 25.1279 37.9155 25.121 37.9177C25.1218 37.9177 24.321 38.3301 23.6096 38.9152C24.1322 35.8424 26.034 32.9685 28.8217 32.1798C27.9385 34.25 27.6216 36.474 27.8577 38.7091C26.833 39.7942 26.3557 41.0957 26.36 42.4099C26.4881 41.0947 27.0558 40.0137 27.9234 39.2168C28.2793 41.7368 29.3311 44.2228 31.0513 46.4C29.896 44.7354 27.9688 40.8987 28.7063 36.4098C30.1642 37.1392 31.2875 38.3987 31.8643 40.1821C31.4857 38.3972 30.4685 36.861 28.7895 35.7992C28.9862 34.5278 29.3269 33.2901 29.792 32.1274C30.5641 32.242 33.5179 33.1268 34.3506 38.7914C33.7471 38.4676 33.1739 38.2875 33.1734 38.2877C33.1887 38.2934 33.5479 38.5887 33.9259 40.1113C34.2722 41.4455 34.0916 43.0619 33.9215 44.2912C33.2912 44.0044 32.7541 43.8265 32.7537 43.8269C32.7533 43.8269 33.387 44.3745 33.594 45.9846C33.7784 47.4209 33.7722 49.2319 33.8011 49.2091C33.8125 49.2095 30.2678 48.688 28.073 46.6462" fill="url(#svg-1917023903_5452_paint3_linear_832_12460)"></path></g></g><defs><filter id="svg-1917023903_5452_filter0_d_832_12460" x="-1.45776" y="11.189" width="62.9177" height="56.3018" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="7.03125"></feOffset><feGaussianBlur stdDeviation="5.625"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0"></feColorMatrix><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_832_12460"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_832_12460" result="shape"></feBlend></filter><linearGradient id="svg-1917023903_5452_paint0_linear_832_12460" x1="30.001" y1="0.20459" x2="30.001" y2="60.2046" gradientUnits="userSpaceOnUse"><stop stop-color="#1D1D1D"></stop><stop offset="1"></stop></linearGradient><linearGradient id="svg-1917023903_5452_paint1_linear_832_12460" x1="39.3666" y1="15.4077" x2="39.3666" y2="31.8933" gradientUnits="userSpaceOnUse"><stop stop-color="white"></stop><stop offset="1" stop-color="#DEDEDE"></stop></linearGradient><linearGradient id="svg-1917023903_5452_paint2_linear_832_12460" x1="18.871" y1="20.7227" x2="18.871" y2="32.6153" gradientUnits="userSpaceOnUse"><stop stop-color="white"></stop><stop offset="1" stop-color="#DEDEDE"></stop></linearGradient><linearGradient id="svg-1917023903_5452_paint3_linear_832_12460" x1="28.9801" y1="32.1274" x2="28.9801" y2="49.2093" gradientUnits="userSpaceOnUse"><stop stop-color="white"></stop><stop offset="1" stop-color="#DEDEDE"></stop></linearGradient><clipPath id="svg-1917023903_5452_clip0_832_12460"><rect x="0.000976562" y="0.20459" width="60" height="60" rx="13.128" fill="white"></rect></clipPath></defs></svg>
+                        <p class="appName">Trilium Notes</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/NostrRelay.png" style="height:100%; width:100%; object-fit: contain; border-radius:13px;">
+                        <p class="appName">Nostr Relay</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/PhotoPrism.png" style="height:100%; width:100%; object-fit: contain; border-radius:13px;">
+                        <p class="appName">PhotoPrism</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/SphinxRelay.png" style="height:100%; width:100%; object-fit: contain; border-radius:13px;">
+                        <p class="appName">Sphinx Relay</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/WoofBot.png" style="height:100%; width:100%; object-fit: contain; border-radius:13px;">
+                        <p class="appName">WoofBot</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/mempool.png" style="height:100%; width:100%; object-fit: contain; border-radius:13px;">
+                        <p class="appName">mempool</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/KhanAcademy.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Khan Academy</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/OpenBlock.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">OpenBlock</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/Mattermost.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">Mattermost</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <img src="static/images/OnEdit.png" style="height:100%; width:100%; object-fit: contain;">
+                        <p class="appName">OnEdit</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+
+                        <p class="appName"></p>
+                    </div>
+                </div>
+
+
+                <!-- <div class="app" onclick="openModal('login')">
+                    <div class="appIcon translate">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="languages"><path stroke="var(--color-violet)" d="m5 8 6 6"/><path stroke="var(--color-violet)" d="m4 14 6-6 2-3"/><path stroke="var(--color-violet)" d="M2 5h12"/><path stroke="var(--color-violet)" d="M7 2h1"/><path stroke="var(--color-cyan)" d="m22 22-5-10-5 10"/><path stroke="var(--color-cyan)" d="M14 18h6"/></svg>
+                        <p class="appName">Translate</p>
+                    </div>
+                </div> -->
+
+                <!-- <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-pulse-icon lucide-heart-pulse"><path fill="var(--color-red)" stroke="var(--color-red)" d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                        <p class="appName">Fitness</p>
+                    </div>
+                </div> -->
+                <!-- <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dock-icon lucide-dock"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 16h12"/></svg>
+                        <p class="appName">Desktop</p>
+                    </div>
+                </div> -->
+
+                <!-- <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-laptop-icon lucide-laptop"><path d="M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2z"/><path d="M20.054 15.987H3.946"/></svg>
+                        <p class="appName">Computer 2</p>
+                    </div>
+                </div>
+                <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pc-case-icon lucide-pc-case"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M15 14h.01"/><path d="M9 6h6"/><path d="M9 10h6"/></svg>
+                        <p class="appName">Computer 3</p>
+                    </div>
+                </div> -->
+                <!-- <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-terminal-icon lucide-square-terminal"><path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect stroke="var(--color-green)" width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>
+                        <p class="appName">Terminal</p>
+                    </div>
+                </div> -->
+                <!-- <div class="app" onclick="openModal('login')">
+                    <div class="appIcon ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="#f2f2f2" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge-icon lucide-gauge"><path d="M3.34 19a10 10 0 1 1 17.32 0"/><path d="m12 14 4-4"/></svg>
+                        <p class="appName">Dash</p>
+                    </div>
+                </div>  -->
+            </div>
+        
+            <div id="paginationControls" style="margin:0 auto 2em auto; display: flex; justify-content: center; align-items: center;">
+                <div id="pageBubbles" style="display: flex; align-items: center;"></div>
+            </div>
+        </div>
+    </section>
+    <!-- <script id="" src="static/nav.js"></script> -->
+
+    <section id="getAP0110">
+        <style>
+            #getAP0110 {
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
+                background-color:transparent; 
+                color:#f2f2f2; 
+                padding:0 0 60px 0; 
+                height:fit-content; 
+                z-index:0
+            }
+
+            #get {
+                display:flex; flex-direction:column;
+                height: fit-content !important;
+                width: 100%;
+                position: fixed;
+                bottom:0;
+                left:0;
+                z-index:-1;
+                padding:6ch 0 3ch 0;
+                pointer-events:auto;
+            }
+
+            .devices-content {
+                flex: 1 1 0;
+                width:fit-content;
+                height:fit-content;
+                margin:0 auto;
+                display: flex;
+                flex-direction: column;
+                gap:1em;
+                padding:3ch;
+            }
+
+            .get-content {
+                background-color: #000;
+            }
+
+            p.certs {
+                font-size: 10pt;
+                margin:0;
+                line-height: 1.5em ;
+                max-width: 430px;
+                display:flex;
+                gap: 0.5ch;
+                flex-wrap: wrap;
+            }
+            p.certs > span {
+                display:inline-flex; 
+                align-items: center; 
+                flex: 1;
+                min-width: fit-content;
+                background-color: #f2f2f2;
+                color:black;
+                border-radius: 4px;
+                padding:0.5ch;
+                padding-right:1ch;
+                height:fit-content;
+                
+                word-wrap: none;
+                white-space-collapse: none;
+            }
+            p.certs > span > svg {
+                margin-right:1ch; 
+                height:1.5em; width: 1.5em;
+                
+            }
+            p.certs > span > a {
+                color: currentColor;
+                text-decoration: none;
+
+                word-wrap: none;
+                white-space-collapse: none;
+            }
+            p.certs > span > a:hover {
+                text-decoration: underline;
+            }
+        </style>
+
+        <div style="width:100%; height:40px; border-top:1px solid #00b0ff; background: linear-gradient(to bottom, RGBA(0, 176, 255, 0.5), RGBA(0, 176, 255, 0.25), RGBA(0, 176, 255, 0.1), transparent); margin-bottom:40px; position: absolute; top:0; left:0;"></div>
+
+        <div id="get">
+
+            <style>
+                #digital-rain {
+                    background-color:black;
+                    position: absolute;
+                    top:0; 
+                    left:0; 
+                    height:100%; 
+                    width:100%; 
+                    z-index:-9;
+                    display:block;
+                }
+            </style>
+            <canvas id="digital-rain"></canvas>
+            <script src="static/digital-rain.js"></script>
+            <script>
+                // Call the function to start the Digital Rain animation. Customize it with options.
+                startDigitalRain({
+                    canvasID:'digital-rain',
+                    dropColor:"RGB(36, 88, 127)", // rgba(0, 0, 0, 0.25)",
+                    trailColor:'RGB(22, 60, 86)',
+                    backgroundColor:'RGB(0,0,0)', // rgb(242, 242, 242) == #f2f2f2
+                    trailLength:'6',
+                    fontSize:16,
+                    speedCoeff:45,
+                    // duration:0,
+                    // divID:"get"
+                });
+            </script>
+
+            <div class="get-content" style="display:flex; padding:3ch; width:fit-content; margin:0 auto 3ch auto;">
+                <p class="mono" style="color:var(--color-cyan); max-width:25ch; word-wrap: anywhere; margin:auto; text-shadow: 0 0 1ch rgba(71, 158, 230, 1);">01000001010100000011000000110001001100010<b style="color:white;">AP0110</b>000</p>
+            </div>
+
+            <div class="devices-content get-content">
+                <div>
+                    <h2 class="mono" style="margin:0;">AP0110 COMPUTERS</h2>
+                    <p class="mono" style="margin:0; color:rgb(150,150,150); font-weight: normal;">Intelligent On-Prem Compute</p>
+                </div>
+                <div style="display:flex; flex-direction:column; height:fit-content; width:fit-content; gap:0.5ch; margin:0.5ch 0 1ch 0">
+                    <p class="certs">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-off-icon lucide-cloud-off"><path d="m2 2 20 20"/><path d="M5.782 5.782A7 7 0 0 0 9 19h8.5a4.5 4.5 0 0 0 1.307-.193"/><path d="M21.532 16.5A4.5 4.5 0 0 0 17.5 10h-1.79A7.008 7.008 0 0 0 10 5.07"/></svg>
+                            <a>Private Cloud</a>
+                        </span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-infinity-icon lucide-infinity"><path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/></svg>
+                            <a>Storage + Apps + AI</a>
+                        </span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-blocks-icon lucide-blocks"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/><rect x="14" y="2" width="8" height="8" rx="1"/></svg>
+                            <a>Stack to Scale</a>
+                        </span>
+                        
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-unplug-icon lucide-unplug"><path d="m19 5 3-3"/><path d="m2 22 3-3"/><path d="M6.3 20.3a2.4 2.4 0 0 0 3.4 0L12 18l-6-6-2.3 2.3a2.4 2.4 0 0 0 0 3.4Z"/><path d="M7.5 13.5 10 11"/><path d="M10.5 16.5 13 14"/><path d="m12 6 6 6 2.3-2.3a2.4 2.4 0 0 0 0-3.4l-2.6-2.6a2.4 2.4 0 0 0-3.4 0Z"/></svg>
+                            <a href="" style="margin-right:0.5ch;">Plug & Play</a>
+                        </span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-ban-icon lucide-shield-ban"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m4.243 5.21 14.39 12.472"/></svg>
+                            <a href="https://www.iso.org/standard/27001">Enterprise-Grade Security</a>
+                        </span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-thumbs-up-icon lucide-thumbs-up"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
+                            <a href="https://www.iso.org/standard/81230.html">Easy to use</a>
+                        </span>
+                        
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-house-icon lucide-map-pin-house"><path d="M15 22a1 1 0 0 1-1-1v-4a1 1 0 0 1 .445-.832l3-2a1 1 0 0 1 1.11 0l3 2A1 1 0 0 1 22 17v4a1 1 0 0 1-1 1z"/><path d="M18 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 .601.2"/><path d="M18 22v-3"/><circle cx="10" cy="10" r="3"/></svg>                <!-- <a href="">No cloud access required</a> -->
+                            <a>Local Everything</a>
+                        </span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi-off-icon lucide-wifi-off"><path d="M12 20h.01"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/><path d="M5 12.859a10 10 0 0 1 5.17-2.69"/><path d="M19 12.859a10 10 0 0 0-2.007-1.523"/><path d="M2 8.82a15 15 0 0 1 4.177-2.643"/><path d="M22 8.82a15 15 0 0 0-11.288-3.764"/><path d="m2 2 20 20"/></svg>
+                            <!-- <a href="">No cloud access required</a> -->
+                            <a>No cloud / internet access required</a>
+                        </span>
+                        
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock-keyhole-icon lucide-lock-keyhole"><circle cx="12" cy="16" r="1"/><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>
+                            <a href="" style="margin-right:0.5ch;">GDPR</a> & <a href="" style="margin-left:0.5ch;">AI Act</a>
+                        </span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-lock-icon lucide-globe-lock"><path d="M15.686 15A14.5 14.5 0 0 1 12 22a14.5 14.5 0 0 1 0-20 10 10 0 1 0 9.542 13"/><path d="M2 12h8.5"/><path d="M20 6V4a2 2 0 1 0-4 0v2"/><rect width="8" height="5" x="14" y="6" rx="1"/></svg>
+                            <a href="" style="margin-right:0.5ch;">HIPPA</a>
+                        </span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-lock-icon lucide-globe-lock"><path d="M15.686 15A14.5 14.5 0 0 1 12 22a14.5 14.5 0 0 1 0-20 10 10 0 1 0 9.542 13"/><path d="M2 12h8.5"/><path d="M20 6V4a2 2 0 1 0-4 0v2"/><rect width="8" height="5" x="14" y="6" rx="1"/></svg>
+                            <a href="https://www.iso.org/standard/27001">ISO/IEC 27001</a>  <a href="https://www.iso.org/standard/81230.html"> & 42001</a>
+                        </span>
+                        <!-- <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-lock-icon lucide-globe-lock"><path d="M15.686 15A14.5 14.5 0 0 1 12 22a14.5 14.5 0 0 1 0-20 10 10 0 1 0 9.542 13"/><path d="M2 12h8.5"/><path d="M20 6V4a2 2 0 1 0-4 0v2"/><rect width="8" height="5" x="14" y="6" rx="1"/></svg>
+                            <a href="https://www.iso.org/standard/81230.html">ISO/IEC 42001</a>
+                        </span> -->
+                    </p>
+                </div>
+
+                <button style="width:100%;" onclick="window.open('https://AP0110.com', '_blank')">Learn More</button>
+                <button class="full" style="width:100%;" onclick="window.open('https://AP0110.com', '_blank')">Shop Computers</button>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

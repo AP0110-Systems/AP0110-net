@@ -1,0 +1,760 @@
+
+* {
+    box-sizing:border-box;
+}
+
+:root {
+    overflow-x:hidden;
+
+    --space: 1em;
+    --accentColr: var(--customAccentColr, #00b0ff); /* rgb(0, 77, 101); */
+    --highlightColr: var(--customHighlightColr, #00b0ff);
+
+    --baseColr: white;
+    --bkgndColr: #f2f2f2;
+    --surfColr: whitesmoke;
+    --dFrgndColr: #909090;
+    --frgndColr: #101010;
+    --opBaseColr: black;
+
+    --color-red: #E4002B;       /* NASA Red */  
+    --color-orange: #FF4F00;    /* International Orange (Aerospace) */
+    --color-yellow: #E2B46C;    /* Apollo Gold */
+    --color-green: #47B332;     /* Apollo Green */
+    --color-cyan: #00b0ff;      /* #00ACC1 */
+    --color-blue: #0032A0;      /* NASA Blue */
+    --color-violet: #8E24AA;    /*  */
+
+    font-size:12pt;
+    font-family:Roboto, Helvetica, Arial, sans-serif;
+    background-color: black;  
+    
+    scrollbar-width:none; /* Firefox */
+    -ms-overflow-style:none; /* Internet Explorer */  
+}
+:root::-webkit-scrollbar {
+    display:none; 
+}
+
+
+html {
+    scroll-padding-top: 6em;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    height: 100%;
+}
+html, body {
+    width:100%;
+    margin:0; padding:0;
+    height:100%;
+}
+body {
+    background-color: #f2f2f2;
+    position:relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+
+
+    scrollbar-width:none; /* Firefox */
+    -ms-overflow-style:none; /* Internet Explorer */  
+}
+body::-webkit-scrollbar {
+    display:none; 
+}
+
+
+body > section {z-index:1; position: relative;}
+
+
+.float {
+    background-color: rgba(0,0,0,0.5);
+    box-shadow: 0 0 0 1ch rgba(0,0,0,0.5)
+}
+
+
+.EM { font-weight:bold; }
+.EM:nth-child(1) { color:var(--color-violet); }
+.EM:nth-child(2) { color:var(--color-blue);   }
+.EM:nth-child(3) { color:var(--color-cyan);   }
+.EM:nth-child(4) { color:var(--color-green);  }
+.EM:nth-child(5) { color:var(--color-yellow); }
+.EM:nth-child(6) { color:var(--color-orange); }
+.EM:nth-child(7) { color:var(--color-red);    }
+
+/* Remove clear and search icons in Chrome, Safari, Edge */
+input[type="search"]::-webkit-search-decoration {
+  display: none;
+}
+
+/* App Search Styling */
+#appSearch input[type="search"]::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#appSearch input[type="search"]:focus::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#appSearch input[type="search"]:focus {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.content {
+    max-width: 980px;
+    margin: auto;
+    margin-top:4em;
+    padding: 0 0.5in;
+}
+
+
+div.buttonRow {
+    display:flex; flex-direction:row; 
+    margin:0; padding:0;
+    gap:1em;
+}
+div.buttonRow > button {
+    white-space: nowrap;
+}
+div.buttonRow > span {
+    flex:1;
+}
+button {
+    margin:0; padding:0 1ch;
+    height:40px;
+    /*width:fit-content;*/
+    background-color:transparent; color:#00b0ff;
+    border:2px solid #00b0ff; border-radius:4px;
+    font-size:12pt; font-family: monospace; font-weight:bold;
+    cursor:pointer;
+
+    -webkit-backdrop-filter:blur(1em); 
+    backdrop-filter:blur(1em); 
+}
+button:hover {
+    background-color:#00b0ff; 
+    color:white;
+}
+button.full {
+    background-color:#00b0ff; 
+    color:white;
+}
+button.full:hover {
+    background-color:#00b0ff; 
+    color:white;
+}
+button.empty:hover {
+    background-color:transparent; 
+    color:white;
+}
+
+button.gray {
+    color:rgb(127,127,127);
+    border-color: currentColor;
+}
+button.gray:hover {
+    color:white;
+    background-color: transparent;
+}
+
+button:disabled {
+    opacity:0.5;
+}
+
+button.blink {
+    animation: blink-fade 2s infinite ease-in;
+}
+
+@keyframes blink-fade {
+    0% { background-color: RGBA(0, 176, 255, 1);}
+    10% { background-color: RGBA(0, 176, 255, 1);}
+    100% { background-color: RGBA(0, 176, 255, 0); }
+}
+
+
+.mono {
+    font-family: monospace;
+}
+
+
+
+        
+@media (orientation: portrait) {
+    :root {
+        --space: 1ch;
+        font-size:10pt;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+}
+
+
+ 
+section {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background-color: #f2f2f2;
+    
+    scroll-snap-align:start;
+    height:fit-content;
+}
+
+
+.row, .column {
+    display:flex;
+    gap:1em;
+}
+.row {
+    flex-direction:row;
+    padding:0;
+    width:100%;
+    max-width:100vw;
+}
+.column {
+    flex-direction:column;
+    max-height:100vh;
+}
+.row > div,
+.column > div {
+    
+    flex:1;
+}
+
+@media (orientation: portrait) {
+    .box > div > div.row,
+    .row {
+        flex-direction:column;
+    }
+}
+
+
+img.app {
+    width:50%;
+    aspect-ratio:1;
+    cursor:pointer;
+    box-shadow: 0 0 40px 0 gray;
+    border-radius: 13%;
+    margin:auto;
+}
+
+
+
+
+
+
+#AP0110 { 
+    height:100vh;
+    width:100%;
+    position: relative;
+    display:flex; flex-direction: column;
+    color:white;
+    font-size:12pt;
+    scroll-snap-align: start;
+    min-height: 100vh;
+    scroll-snap-stop: always;
+    overflow: hidden;
+    background: #000 url('images/space3.png') no-repeat right top;
+    background-attachment: fixed;
+}
+
+@media (orientation: portrait) {
+    #AP0110 {
+        height:100vh;
+    }
+}
+#AP0110 #loginCard {
+    display:none;
+}
+#AP0110.invert #loginCard {
+    display:unset;
+}
+#AP0110.invert #card {
+    display:none;
+}
+#AP0110.invert {
+    filter: invert(1);
+    -webkit-filter: invert(1);
+}
+#AP0110.invert > div:last-of-type {
+    display:none;
+}
+#AP0110 > div:last-of-type {
+    
+}
+
+/* Full-screen button styling */
+#fullscreenBtn {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    z-index: 1;
+    background-color: transparent;
+    border:none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+#fullscreenBtn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Fullscreen mode adjustments for entire document */
+:fullscreen {
+    background-color: #f2f2f2;
+}
+
+:-webkit-full-screen {
+    background-color: #f2f2f2;
+}
+
+:-moz-full-screen {
+    background-color: #f2f2f2;
+}
+
+/* Ensure AP0110 maintains full height in fullscreen mode */
+:fullscreen #AP0110 {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    background: #000 url('images/space3.png') no-repeat center center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+}
+
+:-webkit-full-screen #AP0110 {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    background: #000 url('images/space3.png') no-repeat center center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+}
+
+:-moz-full-screen #AP0110 {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    background: #000 url('images/space3.png') no-repeat center center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+}
+
+/* Hide fullscreen button when in fullscreen mode */
+:fullscreen #fullscreenBtn {
+    display: none !important;
+}
+
+:-webkit-full-screen #fullscreenBtn {
+    display: none !important;
+}
+
+:-moz-full-screen #fullscreenBtn {
+    display: none !important;
+}
+
+#AP0110 #lower {
+    width:100%; height:fit-content;
+    gap:1em;
+}
+
+#AP0110 #landing {
+    width:100%; 
+    height: fit-content;
+    
+}
+
+
+
+
+
+
+
+
+
+#neonav {
+            display:flex;
+            flex-direction:column;
+            position:relative;
+            box-sizing:border-box;
+            height:fit-content;
+            color:#f2f2f2;
+            background-color: transparent;
+            padding:0;
+            overflow:hidden;
+            flex:unset;
+            width:100%;
+        }
+        #neonav #toprow {
+            padding:0;
+            gap:8px;
+        }
+        #neonav .bar {
+            display:flex;
+            flex-direction:row;
+            width:100%;
+            height:44px;
+            align-items:center;
+        }
+        #neonav svg{
+            display:inline;
+            margin:auto;
+            padding:0;
+            fill-opacity:1;
+            overflow:visible;
+        }
+        #neonav form {
+            display:flex;
+            flex-direction:row;
+            flex:1;
+            height:100%;
+            margin:0;
+            border:none;
+            outline:none;
+            align-items:center;
+        }
+        #neonav input[type=search] {
+            flex:1;
+            height:100%;
+            margin:0 0.5em 0 0;
+            font-size:12px;
+            font:16px arial,sans-serif;
+            color: #f2f2f2;
+            background-color:transparent;
+            border:none;
+            outline:0px solid transparent;
+        }
+        #neonav input[type=search]::placeholder {
+            font-family: monospace;
+        }
+        #neonav .delete-button {
+            color:gray;
+            margin-left:4px;
+            cursor: pointer;
+        }
+
+
+        #files:hover {
+            fill:var(--color-cyan);
+            stroke:var(--color-cyan);
+        }
+
+        #search { width:100%; }
+
+        #home_button,
+        #search,
+        #apps_button {
+            background-color: rgba(255,255,255,0.1);
+            border-radius:9px;
+            height:44px;
+
+            -webkit-backdrop-filter: blur(7px); /* For Safari and iOS */
+            backdrop-filter: blur(7px); /* Standard property */
+        }
+
+
+
+
+        #scannerContainer {
+                    width: 100%;
+                    height: auto;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    color: #f2f2f2;
+                    padding: 1em;
+                }
+                #scannerContainer.active {
+                    display: flex;
+                }
+                #scannerContainer button {
+                    height: 40px; min-width: 40px;
+                    font-size: 12pt;
+                    cursor: pointer;
+                }
+                .container-content {
+                    position: relative;
+                    background: rgba(0,0,0,0);
+                    -webkit-backdrop-filter: blur(1ch); 
+                    backdrop-filter: blur(1ch);
+                    border-radius: 10px;
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+                }
+                #dropZone {
+                    position:relative;
+                    border: 2px dashed rgba(255,255,255,1);
+                    border-radius: 10px;
+                    width: 100%;
+                    color: rgba(255,255,255,0.5);
+                    user-select: none;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    padding: 0;
+                }
+                #dropZone.dragover {
+                    border-color: #4caf50;
+                    background: #e8f5e9;
+                    color: #2e7d32;
+                }
+                #dropZone #saveBtn,
+                #dropZone #clearSelectionBtn {
+                    display:flex;
+                    position:absolute;
+                    height:40px; width:40px;
+                    padding:0;
+                    background-color:rgba(0,0,0,0.25);
+                    color:#f2f2f2;
+                    -webkit-backdrop-filter: blur(1ch); 
+                    backdrop-filter: blur(1ch);
+                }
+                #dropZone #clearSelectionBtn {
+                    right:-2px;
+                    border-right:1px solid rgba(255,255,255,1);
+                    border-left:2px dashed rgba(255,255,255,1);
+                }
+                #dropZone #saveBtn {
+                    left:-2px; top:-2px;
+                    border-radius:10px 0;
+                    border-left:1px solid rgba(255,255,255,1);
+                    border-right:2px dashed rgba(255,255,255,1);
+                    border-bottom:2px dashed rgba(255,255,255,1);
+                    border-top:1px solid rgba(255,255,255,1);
+                }
+                #dropZone #clearSelectionBtn {
+                    top:-2px;
+                    border-top:1px solid rgba(255,255,255,1);
+                    border-bottom:2px dashed rgba(255,255,255,1);
+                    border-radius:0 10px;
+                }
+                #dropZone #clearSelectionBtn svg,
+                #dropZone #saveBtn svg {
+                    margin:auto;
+                }
+                #dropZone.dragover #clearSelectionBtn {
+                    border-left:2px dashed #4caf50;
+                }
+                #dropZone.dragover #clearSelectionBtn {
+                    border-bottom:2px dashed #4caf50;
+                }
+                .preview-container {
+                    position: relative;
+                    width: 100%;
+                    border-radius: 10px;
+                    overflow: hidden;
+                }
+                .preview-container img {
+                    display:none;
+                    width: 100%;
+                }
+                .preview-container video {
+                    width: 100%;
+                    border-radius: 10px;
+                    display: none;
+                }
+                .preview-container #previewBtns {
+                    display:flex; flex-direction:column; gap:1ch;
+                    position: absolute;
+                    bottom: 1ch; left:1ch;
+                    width:calc(100% - 2ch);
+                }
+                .preview-container #previewBtns #clearSelectionBtn {
+                    display: none;
+                    color: #f2f2f2; background-color: gray;
+                    padding: 8px 16px;
+                    border:none; border-radius: 50%;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
+                .preview-container #previewBtns .addToInputBtn {
+                    display: none;
+                    color: yellow; background-color: transparent;
+                    border: 2px solid yellow;
+                    padding: 8px 16px;
+                    border-radius: 1ch;
+                    cursor: pointer;
+                    max-width: max-content;
+                    -webkit-backdrop-filter: blur(1ch); 
+                    backdrop-filter: blur(1ch);
+                }
+                .preview-container #captureBtn {
+                    display: none;
+                    position: absolute;
+                    bottom: 1ch; left:calc(50% - 20px);
+                    color: #f2f2f2; background-color: #f2f2f2;
+                    border: 2px solid #f2f2f2;
+                    padding: 8px 16px;
+                    border-radius: 50%;
+                    font-weight: bold;
+                    cursor: pointer;
+                    width:40px;
+                }
+                #uploadPreview {
+                    width: 100%;
+                    border-radius: 10px;
+                    display: none;
+                }
+                #dragDrop {
+                    display:flex; flex-direction:column;
+                    position:relative;
+                    padding:1.5em;
+                }
+                #dragDrop div {
+                    display:flex; flex-direction:row;
+                    padding:1ch;
+                    gap:1ch;
+                }
+                #dragDrop button {
+                    background-color:transparent;
+                    color:CurrentColor;
+                    border:none;
+                }
+
+                
+    
+                div.app {
+                    height:fit-content;
+                    flex:unset;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 10px;
+                    margin:auto;
+                }
+    
+                div.appIcon {
+                    height:60px;
+                    width:60px;
+                    aspect-ratio:1;
+                    flex:unset;
+                    border-radius:10px;
+                    display: flex;
+                    cursor: pointer;
+                    position: relative;
+                    background-color:transparent;
+    
+                    margin-bottom: 1.5em;
+                }
+    
+                div.appIcon p.appName {
+                    position: absolute; bottom:-3em; left:0;
+                    overflow: visible;
+                    width:100%;
+                    display: flex;
+                    justify-content: center;
+                    font-size: smaller; font-weight: normal;
+                    white-space: nowrap;
+                }
+                div.appIcon svg
+                div.appIcon img {
+                    height:100%;
+                    width:100%;
+                }
+    
+                /* Maps */
+                div.earth {
+                    background-color: transparent;
+                }
+                div.earth svg {
+                    height:100%;
+                    width:100%;
+                }
+    
+                /* Archive */
+                div.archive {
+                background: linear-gradient(to bottom, #DEB887, #8B4513); /* Light Brown to Dark Brown */
+                }/* Archive */
+                div.archive > svg > rect,
+                div.archive > svg > path {
+                fill: #8B4513;
+                }
+    
+                div.office {
+                    background-color: rgba(255,255,255,0.5);
+                    -webkit-backdrop-filter: blur(7px); /* For Safari and iOS */
+                    backdrop-filter: blur(7px); /* Standard property */
+                }
+    
+                div.qr {
+                    background-color: #f2f2f2;
+                }
+    
+                #appMenu, #opMenu {
+                    display: none;
+                }
+
+
+:root, html, body {
+    background-color: black;
+}
+
+#launchpad {
+    position:absolute; top:0; left:0; 
+    display: flex; flex-direction:column; 
+    height:100%; width:100%; 
+    backdrop-filter:blur(1em); -webkit-backdrop-filter:blur(1em); 
+    overflow:hidden; 
+    z-index:2;
+    
+    transition: 0.5s;
+    opacity:0;
+    pointer-events: none;
+}
+#launchpad.active {
+    opacity:1;
+    pointer-events: all;
+}
+
+#pageBubbles {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+.page-bubble {
+  scroll-snap-align: center;
+}
+
+#appGrid {
+  display: flex !important;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  height: 100%;
+  scrollbar-width: none; 
+}
+#appGrid::-webkit-scrollbar {
+  display: none; 
+}
+.appGridPage {
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100%;
+  scroll-snap-align: start;
+  display: grid;
+  gap: 2em;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (orientation: landscape) {
+  .appGridPage {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
